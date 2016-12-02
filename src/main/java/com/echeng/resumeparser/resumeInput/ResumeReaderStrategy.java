@@ -4,13 +4,13 @@ import com.echeng.resumeparser.resumeInput.readers.ResumeDfsReader;
 import com.echeng.resumeparser.resumeInput.readers.ResumeFileReader;
 import com.echeng.resumeparser.resumeInput.readers.ResumeHttpReader;
 
-public class ResumeReaderContext {
+public class ResumeReaderStrategy {
 
 	private IResumeReader m_ResumeReader;
 	private String filepath;
 	private String groupname;
 	
-	public ResumeReaderContext(String groupname){
+	public ResumeReaderStrategy(String groupname){
 		this.m_ResumeReader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
 	}
 	
