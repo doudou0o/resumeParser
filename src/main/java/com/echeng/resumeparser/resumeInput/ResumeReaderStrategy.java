@@ -23,7 +23,6 @@ public class ResumeReaderStrategy {
 		m_ResumeReader.getResumeOriFile();
 	}
 
-
 	private IResumeReader getInstanceResumeReader(ResumeInputType resumeInputType) {
 		switch (resumeInputType) {
 			case LOCAL:
