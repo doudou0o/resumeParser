@@ -4,6 +4,10 @@ import com.echeng.resumeparser.resumeInput.readers.ResumeDfsReader;
 import com.echeng.resumeparser.resumeInput.readers.ResumeFileReader;
 import com.echeng.resumeparser.resumeInput.readers.ResumeHttpReader;
 
+/**
+ * 策略模式
+ * 所有的策略临时获取
+ */
 public class ResumeReaderStrategy {
 
 	private IResumeReader m_ResumeReader;
@@ -19,8 +23,8 @@ public class ResumeReaderStrategy {
 		m_ResumeReader.readResume(this.filepath, groupname);
 	}
 
-	public void getOriFile(){
-		m_ResumeReader.getResumeOriFile();
+	public byte[] getOriFile(){
+		return m_ResumeReader.getResumeOriFile();
 	}
 
 	private IResumeReader getInstanceResumeReader(ResumeInputType resumeInputType) {
@@ -35,7 +39,5 @@ public class ResumeReaderStrategy {
 				return null;
 		}
 	}
-
-
 
 }
