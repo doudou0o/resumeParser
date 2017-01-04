@@ -1,11 +1,10 @@
 package com.echeng.resumeparser.core;
 
-import java.util.List;
-
 import com.echeng.resumeparser.common.utils.JsonUtil;
 import com.echeng.resumeparser.common.utils.resumeUtil;
 import com.echeng.resumeparser.convert.FileConvertorStrategy;
 import com.echeng.resumeparser.convert.IFileConvertor;
+import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
 import com.echeng.resumeparser.merge.ResumesMerge;
 import com.echeng.resumeparser.parser.ParserPool;
@@ -29,16 +28,18 @@ public class ResumeParseRuner {
 		resume.setContent(convertor.getFileContent());
 
 		//parse
-		List<Resume> parsed_results = new ParserPool().parse(resume);
-	
-		//merge
-		Resume finalresult = ResumesMerge.merge(parsed_results);
+		ResumeParseResult parseRet = new ParserPool().parse(resume);
 
+		//merge
+		Resume finalResume = ResumesMerge.merge(parseRet.getCandResumes());
+		parseRet.setFinalResume(finalResume);
+		
 		//json
-		String standardJson = JsonUtil.resumeToJson(finalresult, true);
-		String completeJson = JsonUtil.resumeToJson(finalresult, false);
-		finalresult.setStandardJson(standardJson);
-		finalresult.setStandardJson(completeJson);
+		String standardJson = JsonUtil.resumeToJson(finalResume, true);
+		String completeJson = JsonUtil.resumeToJson(finalResume, false);
+		parseRet.setStandardJson(standardJson);
+		parseRet.setStandardJson(completeJson);
+
 	}
 
 
