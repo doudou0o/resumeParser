@@ -5,10 +5,13 @@ import java.util.Set;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.time.StopWatch;
+import com.echeng.resumeparser.common.log.Logger;
+import com.echeng.resumeparser.common.log.LoggerFactory;
+
 
 
 public class MethodTimeActive implements MethodInterceptor {
-
+	private static final Logger logger = LoggerFactory.getLogger(MethodTimeActive.class);
 	
 	
 	@SuppressWarnings("unchecked")
@@ -30,5 +33,6 @@ public class MethodTimeActive implements MethodInterceptor {
         
         return object;
 	}
+	
 
 }

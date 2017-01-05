@@ -2,6 +2,8 @@ package com.echeng.resumeparser.core;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.echeng.resumeparser.common.utils.JsonUtil;
 import com.echeng.resumeparser.common.utils.resumeUtil;
 import com.echeng.resumeparser.convert.FileConvertorStrategy;
@@ -13,6 +15,8 @@ import com.echeng.resumeparser.resumeInput.ResumeReaderStrategy;
 
 public class ResumeParseRuner {
 	//private ApplicationContext ctx;
+	@Autowired
+	ParserPool parsePool;
 	
 	public void run(Resume resume){
 		resume.setExt(resumeUtil.getExtFromResume(resume));
@@ -29,7 +33,7 @@ public class ResumeParseRuner {
 		resume.setContent(convertor.getFileContent());
 
 		//parse
-		List<Resume> parsed_results = new ParserPool().parse(resume);
+		List<Resume> parsed_results = parsePool.parse(resume);
 	
 		//merge
 		Resume finalresult = ResumesMerge.merge(parsed_results);
