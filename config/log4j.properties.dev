@@ -1,0 +1,44 @@
+
+log4j.rootLogger=INFO,Console
+
+log4j.logger.gearman=WARN, R
+
+#log4j.logger.gearman=INFO, R
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+#log4j.appender.stdout.layout.ConversionPattern=%d\t%p\t[%c]\t%m%n
+log4j.appender.stdout.layout.ConversionPattern=%d %p [%t.%c.%M:%L] %m%n
+
+#log4j.appender.R=org.apache.log4j.FileAppender
+log4j.appender.R=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.R.DatePattern='.'yyyy-MM-dd
+log4j.appender.R.file=log/search.log
+log4j.appender.R.Append=true
+log4j.appender.R.layout=org.apache.log4j.PatternLayout
+log4j.appender.R.layout.ConversionPattern=%d %p [%c.%M:%L] %m%n
+
+
+#Console  
+log4j.appender.Console=org.apache.log4j.ConsoleAppender  
+log4j.appender.Console.layout=org.apache.log4j.PatternLayout  
+log4j.appender.Console.layout.ConversionPattern=%d [%t] %-5p [%c] - %m%n  
+log4j.logger.java.sql.ResultSet=INFO  
+log4j.logger.org.apache=INFO  
+log4j.logger.java.sql.Connection=DEBUG  
+log4j.logger.java.sql.Statement=DEBUG  
+log4j.logger.java.sql.PreparedStatement=DEBUG   
+log4j.logger.com.echeng.algorithm.tag_predict.module.cvtag.domain.Dict=error
+log4j.logger.com.echeng.algorithm.tag_predict.module.cvtag.domain.CommonDict=error
+log4j.logger.com.echeng.algorithm.tag_predict.module.cvtag.algo.utils.WordCombinerImpl=info
+log4j.logger.com.echeng.algorithm.tag_predict.module.cvtag.algo.impl.FunctionTextSimilarityImpl=info
+log4j.logger.com.echeng.algorithm.tag_predict.module.cvtag.algo.impl.PredictedFunctionScoreImpl=info
+
+log4j.logger.org.springframework=INFO
+log4j.logger.com.echeng.algorithm.tag_predict.module.algo.impl.fasttext=INFO
+log4j.logger.com.ibatis=DEBUG
+log4j.logger.com.ibatis.common.jdbc.SimpleDataSource=DEBUG
+log4j.logger.com.ibatis.common.jdbc.ScriptRunner=DEBUG
+log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate=DEBUG
+log4j.logger.java.sql.Connection=DEBUG
+log4j.logger.java.sql.Statement=DEBUG
+log4j.logger.java.sql.PreparedStatement=DEBUG

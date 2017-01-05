@@ -9,41 +9,18 @@
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-	
-	
+
+
 	<context:annotation-config />
-	
+
 	<bean id='ParserPool' class="com.echeng.resumeparser.parser.ParserPool"></bean>
-	
-	
-<!-- Common usage -->	
-<!-- 
-	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">  
-        <property name="interceptorNames">  
-            <list>  
-                <value>MethodTimeActive</value>  
-            </list>  
-        </property>  
-        <property name="beanNames">  
-            <list>  
-                <value>FastText</value> 
-                <value>CvtagRawDataPreProcessImpl</value> 
-                <value>WorkingFunctionRecallImpl</value>
-                <value>PredictedFunctionScoreImpl</value> 
-            </list>  
-        </property>  
-    </bean>  
-    <aop:advisor id="methodTimeLog" advice-ref="MethodTimeActive" pointcut="execution(* com.echeng.algorithm.tag_predict.module.cvtag.algo.impl.PredictedFunctionScoreImpl.*(..))"/>
-    <aop:advisor id="methodTimeLog2" advice-ref="MethodTimeActive" pointcut="execution(* com.echeng.algorithm.tag_predict.module.cvtag.algo.impl.PredictedFunctionScoreMatrix.*(..))"/>
-     <aop:config>  
-    	<aop:advisor id="methodTimeLog" advice-ref="MethodTimeActive" pointcut="execution(* com.echeng.algorithm.tag_predict.module.cvtag.algo.PredictedFunctionScore.*(..))"/>
-    	<aop:advisor id="methodTimeLog1" advice-ref="MethodTimeActive" pointcut="execution(* com.echeng.algorithm.tag_predict.module.cvtag.algo.impl.RawDataPreProcessImpl.*(..))"/> 
-    	<aop:advisor id="MethodOutputLog1" advice-ref="MethodOutputLog" pointcut="execution(* com.echeng.algorithm.tag_predict.module.cvtag.algo.impl.RawDataPreProcessImpl.*(..))"/> 
-    </aop:config>  
-  -->   
-  
+
+	<aop:config>
+		<aop:advisor id="MethodOutputLog1" advice-ref="MethodOutputLog"
+			pointcut="execution(* com.echeng.resumeparser.convert.IFileConvertor.*(..))" />
+	</aop:config>  
    
-   
-	
+   	<bean id='MethodOutputLog' class="com.echeng.resumeparser.common.utils.MethodOutputLog"></bean>
+   	<bean id='MethodTimeActive' class="com.echeng.resumeparser.common.utils.MethodTimeActive"></bean>
 </beans>
  
