@@ -2,6 +2,8 @@ package com.echeng.resumeparser.domain.resume;
 
 import java.util.List;
 
+import com.google.gson.annotations.Expose;
+
 import lombok.Data;
 
 
@@ -11,16 +13,19 @@ public class Resume {
 	private String groupName;
 	private String oriName;
 	private String ext;
-	private String content;
 	private byte[] fileOri;
-	
+
+	@Expose
+	private String content;
+
+	@Expose
 	private BasicInfo basic;
+	@Expose
 	private List<Education> education;
+	@Expose
 	private List<Employment> work;
+	@Expose
 	private List<Project> project;
-	
-	private String standardJson;
-	private String completeJson;
 	
 	public Resume(String fileName, String groupName){
 		this.fileName  = fileName;

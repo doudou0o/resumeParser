@@ -1,6 +1,6 @@
 package com.echeng.resumeparser.convert;
 
-import com.echeng.resumeparser.common.Contant;
+import com.echeng.resumeparser.common.Constant;
 import com.echeng.resumeparser.convert.convertors.DocConvertor;
 import com.echeng.resumeparser.convert.convertors.PdfConvertor;
 
@@ -14,13 +14,13 @@ public class FileConvertorStrategy implements IFileConvertor {
 	private IFileConvertor m_FileConvector;
 
 	public FileConvertorStrategy(String ext){
-		if (Contant.TXT.equals(ext)){
+		if (Constant.TXT.equals(ext)){
 			m_FileConvector = new DocConvertor();
 		}
-		if (Contant.DOC.equals(ext)){
+		if (Constant.DOC.equals(ext)){
 			m_FileConvector = new DocConvertor();
 		}
-		if (Contant.PDF.equals(ext)){
+		if (Constant.PDF.equals(ext)){
 			m_FileConvector = new PdfConvertor();
 		}
 	}
