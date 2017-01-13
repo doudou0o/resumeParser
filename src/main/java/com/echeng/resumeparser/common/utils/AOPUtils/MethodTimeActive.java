@@ -1,4 +1,4 @@
-package com.echeng.resumeparser.common.utils;
+package com.echeng.resumeparser.common.utils.AOPUtils;
 
 import java.util.Set;
 

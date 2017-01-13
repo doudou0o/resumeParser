@@ -21,8 +21,8 @@
 			pointcut="execution(* com.echeng.resumeparser.convert.IFileConvertor.*(..))" />
 	</aop:config>  
    
-   	<bean id='MethodOutputLog' class="com.echeng.resumeparser.common.utils.MethodOutputLog"></bean>
-   	<bean id='MethodTimeActive' class="com.echeng.resumeparser.common.utils.MethodTimeActive"></bean>
+   	<bean id='MethodOutputLog' class="com.echeng.resumeparser.common.utils.AOPUtils.MethodOutputLog"></bean>
+   	<bean id='MethodTimeActive' class="com.echeng.resumeparser.common.utils.AOPUtils.MethodTimeActive"></bean>
    	
    	<!-- 配置bean文件 -->
     <import resource="classpath:spring/bean_*.xml" />
