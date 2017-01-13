@@ -1,0 +1,129 @@
+package com.echeng.resumeparser.common.utils;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
+import com.echeng.resumeparser.common.log.Logger;
+import com.echeng.resumeparser.common.log.LoggerFactory;
+
+import lombok.Data;
+
+@Data
+public class EnvironmentUtil {
+	private static final Logger logger = LoggerFactory.getLogger(EnvironmentUtil.class);
+	
+	private static Environment curEnv;
+	
+	public enum Environment {
+		ONLINE, DEV, TEST, UNKNOWN
+	};
+
+
+	public static Environment getCurrentEnvironment(){
+		if (curEnv != null) return curEnv;
+
+		if (judgeOS()) return curEnv;
+		
+		if (judgeGMconf()) return curEnv;
+		
+		if (judgeIPAddress()) return curEnv;
+		
+		curEnv = Environment.UNKNOWN;
+		return curEnv;
+	}
+	
+	public static String getConfigName(String fileName) {
+		return null;
+	}
+	
+	/**
+	 * 加载日志文件的时候，因为此函数使用logger进行输出
+	 * @param fileName
+	 * @return
+	 */
+	public static String getConfigNameForLogSetting(String fileName) {
+		return null;
+	}
+	
+	private static Boolean judgeOS(){
+		String os = System.getProperty("os.name");
+		if(os.toLowerCase().startsWith("windows") || os.toLowerCase().startsWith("mac")){
+			curEnv = Environment.DEV;
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	private static Boolean judgeGMconf(){
+		List<String> allHosts = GMDNSConfFileUtil.getAllHosts();
+		if (null == allHosts)
+			return false;
+		
+		for (String host : allHosts){
+			if (host.startsWith("192.168.8.")){
+				curEnv = Environment.ONLINE;
+				return true;
+			} else if (host.startsWith("10.9.10.")) {
+				curEnv = Environment.TEST;
+				return true;
+			} else if (host.startsWith("192.168.1.")) {
+				curEnv = Environment.DEV;
+				return true;
+			} else {
+				logger.info("no host can ");
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	private static Boolean judgeIPAddress(){
+		ArrayList<String> localIPs = new ArrayList<>();
+		try {
+			Enumeration<?> e = NetworkInterface.getNetworkInterfaces();
+			while (e.hasMoreElements()) {
+				NetworkInterface n = (NetworkInterface) e.nextElement();
+				Enumeration<?> ee = n.getInetAddresses();
+				while (ee.hasMoreElements()) {
+					InetAddress i = (InetAddress) ee.nextElement();
+					if (i.getHostAddress().trim().startsWith("192.168.1"))
+						localIPs.add(i.getHostAddress().trim());
+					if (i.getHostAddress().trim().startsWith("192.168.8"))
+						localIPs.add(i.getHostAddress().trim());
+					if (i.getHostAddress().trim().startsWith("10.9.10"))
+						localIPs.add(i.getHostAddress().trim());
+				}
+			}
+		} catch (SocketException e1) {
+			e1.printStackTrace();
+		}
+		
+		for (String ip : localIPs)
+			if (ip.startsWith("192.168.8.")){
+				curEnv = Environment.ONLINE;
+				return true;
+			}
+		for (String ip : localIPs)
+			if (ip.startsWith("10.9.10.")){
+				curEnv = Environment.TEST;
+				return true;
+			}
+		for (String ip : localIPs)
+			if (ip.startsWith("192.168.1.")){
+				curEnv = Environment.DEV;
+				return true;
+			}
+		
+		return false;
+	}
+
+	
+	public static void main(String[] args) {
+		System.out.println(EnvironmentUtil.getCurrentEnvironment());
+	}
+}

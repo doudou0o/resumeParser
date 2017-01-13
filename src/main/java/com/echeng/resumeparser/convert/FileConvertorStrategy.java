@@ -3,6 +3,7 @@ package com.echeng.resumeparser.convert;
 import com.echeng.resumeparser.common.Constant;
 import com.echeng.resumeparser.convert.convertors.DocConvertor;
 import com.echeng.resumeparser.convert.convertors.PdfConvertor;
+import com.echeng.resumeparser.convert.convertors.TxtConvertor;
 
 /**
  * 代理模式
@@ -15,7 +16,7 @@ public class FileConvertorStrategy implements IFileConvertor {
 
 	public FileConvertorStrategy(String ext){
 		if (Constant.TXT.equals(ext)){
-			m_FileConvector = new DocConvertor();
+			m_FileConvector = new TxtConvertor();
 		}
 		if (Constant.DOC.equals(ext)){
 			m_FileConvector = new DocConvertor();
@@ -32,6 +33,10 @@ public class FileConvertorStrategy implements IFileConvertor {
 	public void convert() {
 		m_FileConvector.convert();		
 	}
+	
+	public void convert(byte[] fileBytes) {
+		m_FileConvector.convert(fileBytes);
+	}
 
 	public void setSaveFeasture(Boolean isSave) {
 		m_FileConvector.setSaveFeasture(isSave);
@@ -45,5 +50,4 @@ public class FileConvertorStrategy implements IFileConvertor {
 		return m_FileConvector.getLineFeature();
 	}
 
-	
 }

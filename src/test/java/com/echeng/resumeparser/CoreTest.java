@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:config/mainComponent.xml")
+@ContextConfiguration(locations = "file:properties/spring/mainComponent.xml")
 public class CoreTest {
 
 	@BeforeClass

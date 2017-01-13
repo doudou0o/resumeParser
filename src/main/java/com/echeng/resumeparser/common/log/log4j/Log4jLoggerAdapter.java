@@ -35,7 +35,7 @@ public class Log4jLoggerAdapter implements LoggerAdapter {
 
     static {
     	//ALTools 使用log日志，此时不能再日志类中使用
-    	String currentConfigFile = LoadConfig.getConfigNameForLogSetting("config/log4j.properties");
+    	String currentConfigFile = LoadConfig.getConfigNameForLogSetting("properties/config/log4j.properties");
     	//String currentConfigFile = "config/log4j.properties";
     	PropertyConfigurator.configure(currentConfigFile);
     }

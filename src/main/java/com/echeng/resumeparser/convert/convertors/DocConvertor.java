@@ -9,6 +9,11 @@ public class DocConvertor implements IFileConvertor {
 		
 	}
 
+	public void convert(byte[] fileBytes) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void convert() {
 		// TODO Auto-generated method stub
 		

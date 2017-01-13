@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- ==================== resume reader bean configuration ==================== -->
+	
+	
+	<!-- ====== resume reader strategy ====== -->
+	<bean id='resumeReaderStrategy'
+		class="com.echeng.resumeparser.resumeInput.ResumeReaderStrategy2"
+		scope="prototype" >
+		<constructor-arg type="java.lang.String" value="default"/>
+    </bean>
+
+
+	<!-- ====== resume readers ============== -->
+
+	<!-- local file reader -->
+	<bean id='fileReader'
+		class="com.echeng.resumeparser.resumeInput.readers.ResumeFileReader" />
+	<!-- http file reader -->
+	<bean id='httpReader'
+		class="com.echeng.resumeparser.resumeInput.readers.ResumeHttpReader" />
+	<!-- dfs file reader -->
+	<bean id='dfsReader'
+		class="com.echeng.resumeparser.resumeInput.readers.ResumeDfsReader" />
+	
+</beans>

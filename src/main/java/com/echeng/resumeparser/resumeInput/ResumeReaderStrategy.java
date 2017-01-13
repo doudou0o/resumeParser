@@ -14,17 +14,19 @@ public class ResumeReaderStrategy {
 	private String filepath;
 	private String groupname;
 	
+	private byte[] fileBytes;
+	
 	public ResumeReaderStrategy(String groupname){
 		this.m_ResumeReader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
 	}
 	
 	public void readResume(String filepath){
 		this.filepath = filepath;
-		m_ResumeReader.readResume(this.filepath, groupname);
+		fileBytes = m_ResumeReader.readResume(this.filepath, groupname);
 	}
 
 	public byte[] getOriFile(){
-		return m_ResumeReader.getResumeOriFile();
+		return fileBytes;
 	}
 
 	private IResumeReader getInstanceResumeReader(ResumeInputType resumeInputType) {

@@ -11,7 +11,7 @@ import com.echeng.resumeparser.common.log.LoggerFactory;
 import junit.framework.TestCase;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:config/mainComponent.xml")
+@ContextConfiguration(locations = "file:properties/spring/mainComponent.xml")
 public class UtilsTest extends TestCase {
 	private static final Logger logger = LoggerFactory.getLogger(UtilsTest.class);
 	protected void setUp() throws Exception {

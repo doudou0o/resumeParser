@@ -12,6 +12,7 @@
 
 
 	<context:annotation-config />
+	
 
 	<bean id='ParserPool' class="com.echeng.resumeparser.parser.ParserPool"></bean>
 
@@ -22,5 +23,8 @@
    
    	<bean id='MethodOutputLog' class="com.echeng.resumeparser.common.utils.MethodOutputLog"></bean>
    	<bean id='MethodTimeActive' class="com.echeng.resumeparser.common.utils.MethodTimeActive"></bean>
+   	
+   	<!-- 配置bean文件 -->
+    <import resource="classpath:spring/bean_*.xml" />
 </beans>
  

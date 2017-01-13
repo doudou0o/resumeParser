@@ -1,22 +1,22 @@
-package com.echeng.resumeparser.convert.convertors;
+       package com.echeng.resumeparser.convert.convertors;
 
 import com.echeng.resumeparser.convert.IFileConvertor;
 
-public class PdfConvertor implements IFileConvertor {
+public class TxtConvertor implements IFileConvertor {
+	private byte[] fileBytes;
+	private String filecontent;
 
 	public void feed(byte[] fileBytes) {
-		// TODO Auto-generated method stub
-		
+		this.fileBytes = fileBytes;
 	}
 
 	public void convert(byte[] fileBytes) {
-		// TODO Auto-generated method stub
-		
+		feed(fileBytes);
+		convert();
 	}
 
 	public void convert() {
-		// TODO Auto-generated method stub
-		
+		this.filecontent = new String(fileBytes);
 	}
 
 	public void setSaveFeasture(Boolean isSave) {
@@ -25,8 +25,7 @@ public class PdfConvertor implements IFileConvertor {
 	}
 
 	public String getFileContent() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.filecontent;
 	}
 
 	public String getLineFeature() {

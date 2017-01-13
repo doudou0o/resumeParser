@@ -1,7 +1,10 @@
 package com.echeng.resumeparser.core;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.echeng.resumeparser.common.utils.JsonUtil;
-import com.echeng.resumeparser.common.utils.resumeUtil;
+import com.echeng.resumeparser.common.utils.ResumeUtil;
 import com.echeng.resumeparser.convert.FileConvertorStrategy;
 import com.echeng.resumeparser.convert.IFileConvertor;
 import com.echeng.resumeparser.domain.ResumeParseResult;
@@ -9,15 +12,18 @@ import com.echeng.resumeparser.domain.resume.Resume;
 import com.echeng.resumeparser.merge.ResumesMerge;
 import com.echeng.resumeparser.parser.ParserPool;
 import com.echeng.resumeparser.resumeInput.ResumeReaderStrategy;
+import com.echeng.resumeparser.resumeInput.ResumeReaderStrategy2;
 
 public class ResumeParseRuner {
-	//private ApplicationContext ctx;
+	private ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/mainComponent.xml");
 	
 	public void run(Resume resume){
-		resume.setExt(resumeUtil.getExtFromResume(resume));
-	
+		resume.setExt(ResumeUtil.getExtFromResume(resume));
+
 		//read
-		ResumeReaderStrategy resumeReader = new ResumeReaderStrategy(resume.getGroupName());
+		//ResumeReaderStrategy resumeReader = new ResumeReaderStrategy(resume.getGroupName());
+		ResumeReaderStrategy2 resumeReader = (ResumeReaderStrategy2) ctx.getBean("resumeReaderStrategy");
+		resumeReader.setGroupname(resume.getGroupName());
 		resumeReader.readResume(resume.getFileName());
 		resume.setFileOri(resumeReader.getOriFile());
 
@@ -33,7 +39,7 @@ public class ResumeParseRuner {
 		//merge
 		Resume finalResume = ResumesMerge.merge(parseRet.getCandResumes());
 		parseRet.setFinalResume(finalResume);
-		
+
 		//json
 		String standardJson = JsonUtil.resumeToJson(finalResume, true);
 		String completeJson = JsonUtil.resumeToJson(finalResume, false);
@@ -44,6 +50,6 @@ public class ResumeParseRuner {
 
 
 	public static void main(String[] args) {
-		new ResumeParseRuner().run(new Resume("local1","filename.txt"));
+		new ResumeParseRuner().run(new Resume("testResume/test.txt","local"));
 	}
 }
