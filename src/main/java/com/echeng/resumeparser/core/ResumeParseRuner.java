@@ -11,6 +11,7 @@ import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
 import com.echeng.resumeparser.merge.ResumesMerge;
 import com.echeng.resumeparser.parser.ParserPool;
+import com.echeng.resumeparser.resumeInput.IResumeReaderStrategy;
 import com.echeng.resumeparser.resumeInput.ResumeReaderStrategy;
 import com.echeng.resumeparser.resumeInput.ResumeReaderStrategy2;
 
@@ -22,9 +23,8 @@ public class ResumeParseRuner {
 
 		//read
 		//ResumeReaderStrategy resumeReader = new ResumeReaderStrategy(resume.getGroupName());
-		ResumeReaderStrategy2 resumeReader = (ResumeReaderStrategy2) ctx.getBean("resumeReaderStrategy");
-		resumeReader.setGroupname(resume.getGroupName());
-		resumeReader.readResume(resume.getFileName());
+		IResumeReaderStrategy resumeReader = (ResumeReaderStrategy2) ctx.getBean("resumeReaderStrategy");
+		resumeReader.readResume(resume.getGroupName(), resume.getFileName());
 		resume.setFileOri(resumeReader.getOriFile());
 
 		//convert

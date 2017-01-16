@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * 策略模式
  * 所有的策略临时获取
  */
-public class ResumeReaderStrategy2 {
+public class ResumeReaderStrategy2 implements IResumeReaderStrategy {
 	
 	private String filepath;
 	private String groupname;
@@ -27,20 +27,31 @@ public class ResumeReaderStrategy2 {
 	@Resource(name="dfsReader")
 	private IResumeReader resumeDfsReader;
 	
+	public ResumeReaderStrategy2(){}
+
 	public ResumeReaderStrategy2(String groupname){
 		this.m_ResumeReader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
 		this.groupname = groupname;
 	}
 	
+	@Override
 	public void readResume(String filepath){
 		this.filepath = filepath;
 		fileBytes = m_ResumeReader.readResume(this.filepath, groupname);
 	}
+	
+	@Override
+	public void readResume(String groupname, String filepath){
+		setGroupname(groupname);
+		readResume(filepath);
+	}
 
+	@Override
 	public byte[] getOriFile(){
 		return fileBytes;
 	}
 	
+	@Override
 	public void setGroupname(String groupname){
 		this.m_ResumeReader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
 		this.groupname = groupname;
