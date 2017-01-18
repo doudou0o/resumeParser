@@ -1,9 +1,9 @@
 package com.echeng.resumeparser.core;
 
-import org.apache.log4j.BasicConfigurator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.echeng.resumeparser.common.Constant;
 import com.echeng.resumeparser.common.utils.JsonUtil;
 import com.echeng.resumeparser.common.utils.ResumeUtil;
 import com.echeng.resumeparser.convert.FileConvertorStrategy;
@@ -15,7 +15,8 @@ import com.echeng.resumeparser.parser.ParserPool;
 import com.echeng.resumeparser.resumeInput.IResumeReaderStrategy;
 
 public class ResumeParseRuner {
-	private ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/mainComponent.xml");
+	//private ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/mainComponent.xml");
+	private ApplicationContext ctx = new ClassPathXmlApplicationContext(Constant.SPRING_FILE);
 	
 	public void run(Resume resume){
 		resume.setExt(ResumeUtil.getExtFromResume(resume));

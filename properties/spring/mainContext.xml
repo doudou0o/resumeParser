@@ -24,6 +24,9 @@
    	<bean id='MethodOutputLog' class="com.echeng.resumeparser.common.utils.AOPUtils.MethodOutputLog"></bean>
    	<bean id='MethodTimeActive' class="com.echeng.resumeparser.common.utils.AOPUtils.MethodTimeActive"></bean>
    	
+   	<!-- server入口 -->
+   	<bean id='server' class="com.echeng.resumeparser.server.gmserverImpl" init-method="init"/>
+   	
    	<!-- 配置bean文件 -->
     <import resource="classpath:spring/bean_*.xml" />
 </beans>

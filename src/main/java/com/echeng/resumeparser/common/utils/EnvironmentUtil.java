@@ -1,5 +1,6 @@
 package com.echeng.resumeparser.common.utils;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -37,7 +38,28 @@ public class EnvironmentUtil {
 	}
 	
 	public static String getConfigName(String fileName) {
-		return null;
+		String retFileName = fileName;
+		Environment env = EnvironmentUtil.getCurrentEnvironment();
+		
+		switch (env) {
+			case UNKNOWN:
+			case ONLINE:
+				break;
+			case DEV:
+				retFileName += ".dev";
+				break;
+			case TEST:
+				retFileName += ".test";
+				break;
+		}
+		
+		File file = new File(retFileName);
+		if (!file.exists()) {
+			logger.info("file %s is not exist, use config file %s.",retFileName, fileName);
+			retFileName = fileName;
+		}
+		logger.info("current env is: %s, configName is %s",env.name(), retFileName);
+		return retFileName;
 	}
 	
 	/**
@@ -46,7 +68,33 @@ public class EnvironmentUtil {
 	 * @return
 	 */
 	public static String getConfigNameForLogSetting(String fileName) {
-		return null;
+		String retFileName = fileName;
+		String os = System.getProperty("os.name"); 
+		Environment env = Environment.ONLINE;
+		
+		//开发的时候打印到console中，否则开发的人员比较容易修改上线使用的config/log4j.properties
+		if(os.toLowerCase().startsWith("windows") || os.toLowerCase().startsWith("mac")) {
+			env = Environment.DEV;
+		}
+		
+		switch (env) {
+			case UNKNOWN:
+			case ONLINE:
+				break;
+			case DEV:
+				retFileName += ".dev";
+				break;
+			case TEST:
+				retFileName += ".test";
+				break;
+		}
+		
+		File file = new File(retFileName);
+		if (!file.exists()) {
+			System.err.printf("file %s is not exist, use config file %s.",retFileName, fileName);
+			retFileName = fileName;
+		}
+		return retFileName;
 	}
 	
 	private static Boolean judgeOS(){
@@ -75,7 +123,7 @@ public class EnvironmentUtil {
 				curEnv = Environment.DEV;
 				return true;
 			} else {
-				logger.info("no host can ");
+				logger.info("no host can be matched:%s", allHosts.toString());
 				return false;
 			}
 		}
@@ -100,7 +148,7 @@ public class EnvironmentUtil {
 				}
 			}
 		} catch (SocketException e1) {
-			e1.printStackTrace();
+			logger.info("get local ip address raise some exceptions:\n", e1);
 		}
 		
 		for (String ip : localIPs)

@@ -1,4 +1,4 @@
-       package com.echeng.resumeparser.convert.convertors;
+package com.echeng.resumeparser.convert.convertors;
 
 import com.echeng.resumeparser.convert.IFileConvertor;
 
@@ -16,6 +16,7 @@ public class TxtConvertor implements IFileConvertor {
 	}
 
 	public void convert() {
+		//TODO 判断编码
 		this.filecontent = new String(fileBytes);
 	}
 
