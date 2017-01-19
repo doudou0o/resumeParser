@@ -1,5 +1,9 @@
 package com.echeng.resumeparser;
 
+import org.apache.log4j.PropertyConfigurator;
+
+import com.echeng.resumeparser.common.Constant;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -10,6 +14,9 @@ import junit.framework.TestSuite;
 public class AppTest 
     extends TestCase
 {
+	static {
+		PropertyConfigurator.configure(Constant.LOG_FILE);
+	}
     /**
      * Create the test case
      *

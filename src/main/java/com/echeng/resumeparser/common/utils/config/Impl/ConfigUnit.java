@@ -1,7 +1,5 @@
 package com.echeng.resumeparser.common.utils.config.Impl;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,10 +54,12 @@ public class ConfigUnit implements ALConfig {
 			//FileInputStream fs = null;
 			InputStream fs = null;
 			try {
-				String configFineName = "properties/config/"+fileName;
+				String configFineName = fileName;
 				//add this for loading config file base current env(dev, onlint, test).
 				configFineName = EnvironmentUtil.getConfigName(configFineName);
-				fs = new FileInputStream(new File(configFineName));
+				fs = ConfigUnit.class.getClassLoader().getResourceAsStream(configFineName);
+
+				//fs = new FileInputStream(new File(url.getFile()));
 				properties.load(fs);
 			} catch (Exception e) {
 				e.printStackTrace();

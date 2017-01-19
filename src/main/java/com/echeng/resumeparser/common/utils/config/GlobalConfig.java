@@ -11,7 +11,7 @@ public class GlobalConfig {
 		if (fileProperties.containsKey(fileName)) {
 			return fileProperties.get(fileName);
 		}
-		
+
 		ConfigUnit tmpConfig = new ConfigUnit();
 		tmpConfig.loadProperties(fileName);
 		

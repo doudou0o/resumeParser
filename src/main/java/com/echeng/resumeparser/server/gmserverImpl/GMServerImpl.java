@@ -10,7 +10,7 @@ public class GMServerImpl extends BaseWorker implements GearmanFunction {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("init here");
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class GMServerImpl extends BaseWorker implements GearmanFunction {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("run here");
 	}
 
 	@Override

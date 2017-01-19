@@ -1,5 +1,7 @@
 package com.echeng.resumeparser.convert.convertors;
 
+import java.io.UnsupportedEncodingException;
+
 import com.echeng.resumeparser.convert.IFileConvertor;
 
 public class TxtConvertor implements IFileConvertor {
@@ -17,7 +19,12 @@ public class TxtConvertor implements IFileConvertor {
 
 	public void convert() {
 		//TODO 判断编码
-		this.filecontent = new String(fileBytes);
+		try {
+			this.filecontent = new String(fileBytes, "utf8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void setSaveFeasture(Boolean isSave) {

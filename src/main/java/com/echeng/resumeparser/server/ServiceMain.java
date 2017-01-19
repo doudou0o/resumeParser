@@ -31,7 +31,7 @@ public class ServiceMain {
 		try {		
 			@SuppressWarnings("resource")
 			ApplicationContext context = new ClassPathXmlApplicationContext(contextFile);
-			Server obj = (Server) context.getBean("service");
+			Server obj = (Server) context.getBean("server");
 			obj.run();
 		} catch (Throwable e) {
 			e.printStackTrace();
