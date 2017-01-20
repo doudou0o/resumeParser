@@ -27,6 +27,9 @@
    	<!-- server入口 -->
    	<bean id='server' class="com.echeng.resumeparser.server.gmserverImpl.GMServerImpl" init-method="init"/>
    	
+   	<!-- controller -->
+	<bean id='control' class="com.echeng.resumeparser.core.ParseController" />
+   	
    	<!-- 配置bean文件 -->
     <import resource="classpath:properties/spring/bean_*.xml" />
 </beans>

@@ -1,12 +1,17 @@
 package com.echeng.resumeparser.common.utils;
 
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import com.echeng.resumeparser.domain.resume.Resume;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class JsonUtil {
-	private static Gson gson_sta = new Gson();
-	private static Gson gson_cop = new Gson();
+	private static Gson gson_sta;
+	private static Gson gson_cop;
+    private static final Gson gson = new Gson();
 	
 	static{
 		gson_cop = new GsonBuilder()
@@ -43,6 +48,30 @@ public class JsonUtil {
 		        .create();
 	}
 	
+	// ===========普通 包装================
+	@SuppressWarnings("unchecked")
+    public static LinkedHashMap<String, Object> parseLinkedHashMap(Object obj) {
+        return (LinkedHashMap<String, Object>) gson.fromJson(obj.toString(), LinkedHashMap.class);
+    }
+
+    @SuppressWarnings("unchecked")
+	public static HashMap<String, Object> parseHashMap(Object obj) {
+        return (HashMap<String, Object>) gson.fromJson(obj.toString(), HashMap.class);
+    }
+
+    public static String toJson(Object obj) {
+        return gson.toJson(obj);
+    }
+
+    public static <T> T fromJson(String jsonStr, Class<T> classOfT) {
+        return gson.fromJson(jsonStr, classOfT);
+    }
+
+    public static Object fromJson(String jsonStr, Type type) {
+        return gson.fromJson(jsonStr, type);
+    }
+
+	// ========resume 相关========
 	public static Resume jsonToResume(String json){
 		return JsonToResume(json);
 	}

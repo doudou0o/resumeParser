@@ -1,5 +1,8 @@
 package com.echeng.resumeparser.server;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.log4j.PropertyConfigurator;
 
 import com.echeng.resumeparser.common.Constant;
@@ -15,8 +18,9 @@ public abstract class BaseWorker implements Server {
 
 	public static final String FUNCTION_NAME = SEVER_CONFIG.getString("worker_name");
 	public static final String SERVER_HOST = SEVER_CONFIG.getString("server_host");
-	public static final String SERVER_PORT = SEVER_CONFIG.getString("server_port");
-	public static final String WORKER_COUNT = SEVER_CONFIG.getString("worker_count");
+	public static final Integer SERVER_PORT = SEVER_CONFIG.getInt("server_port");
+	public static final Integer WORKER_COUNT = SEVER_CONFIG.getInt("worker_count");
+	public static final List<String> M_LIST = Arrays.asList(SEVER_CONFIG.getString("worker_mList").split(","));
 	
 	public static final ERROR ERROR_0 = ERROR.ERROR_0;
 	public static final ERROR ERROR_1 = ERROR.ERROR_1;
@@ -34,38 +38,37 @@ public abstract class BaseWorker implements Server {
 	
 	public abstract void destory();
 	
+	public enum ERROR{
+		ERROR_0(0,""),
+		ERROR_1(1,"header is invalid!"),
+		ERROR_2(2,"request is not satisfied"),
+		ERROR_3(3,"the work returned none"),
+		ERROR_4(4,"work raise some exceptions"),
+		ERROR_5(5,"have no idea yet"),
+		;
+		
+		private int id;
+		private String info;
+		
+		private ERROR(int id, String info){
+			this.id   = id;
+			this.info = info;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public String getInfo() {
+			return info;
+		}
+
+		public void setInfo(String info) {
+			this.info = info;
+		}
+	};
 } 
-
-enum ERROR{
-	ERROR_0(0,""),
-	ERROR_1(1,""),
-	ERROR_2(2,""),
-	ERROR_3(3,""),
-	ERROR_4(4,""),
-	ERROR_5(5,""),
-	;
-	
-	private int id;
-	private String info;
-	
-	private ERROR(int id, String info){
-		this.id   = id;
-		this.info = info;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getInfo() {
-		return info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
-	}
-};
