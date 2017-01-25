@@ -1,10 +1,19 @@
 package com.echeng.resumeparser.domain.serverIO.request.impl;
 
-import com.echeng.resumeparser.domain.serverIO.request.Request;
+import java.util.Map;
+
+import com.echeng.resumeparser.domain.serverIO.request.IRequest;
 
 import lombok.Data;
 
-public class ResumeParseRequest implements Request {
+/*
+ * every request must implement two static functions
+ * for check request input ( Map<String, Object> P key value pair )
+ */
+public class ResumeParseRequest implements IRequest {
+	
+	private static final String MNAME = "resume_parse";
+	
 	private String groupName;
 	private String fileName;
 
@@ -12,6 +21,15 @@ public class ResumeParseRequest implements Request {
 	private byte[] fileContent;
 	
 	private Option option;
+
+	// must implement
+	public static Boolean isMethodMatch(String m){
+		return MNAME.equals(m);
+	}
+	// must implement
+	public static String getRequestMatchInfo(Map<String,Object> reqDicP){
+		return null;
+	}
 	
 	@Override
 	public Boolean isValid(){

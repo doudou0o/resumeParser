@@ -1,19 +1,27 @@
 package com.echeng.resumeparser.server.gmserverImpl.domain;
 
+import java.util.Map;
+
 import com.echeng.resumeparser.domain.serverIO.response.Response;
+import com.google.gson.annotations.Expose;
 
 import lombok.Data;
 
 @Data
 public class OutputGM {
-	private Header header;
+	@Expose
+	private Map<String, String> header;
+	@Expose
 	private Response response;
 	
+	private Header headerObj;
+
 	public OutputGM(){}
 
-	public OutputGM(Header header, Response response) {
-		this.header = header;
+	public OutputGM(Header headerObj, Response response) {
+		this.headerObj = headerObj;
 		this.response = response;
+		this.header = headerObj.getHeaderMap();
 	}
 	
 }

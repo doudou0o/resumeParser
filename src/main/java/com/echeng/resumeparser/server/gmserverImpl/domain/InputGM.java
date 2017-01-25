@@ -1,50 +1,67 @@
 package com.echeng.resumeparser.server.gmserverImpl.domain;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.echeng.resumeparser.domain.serverIO.request.Request;
+import com.echeng.resumeparser.domain.serverIO.request.RequestHelper;
+import com.google.gson.annotations.Expose;
 
 import lombok.Data;
 
 @Data
 public class InputGM {
-	private Header header;
-	private RequestModel requestModel;
+	@Expose
+	private RequestModel request;
+	@Expose
+	private Map<String, String> header;
 	
+	private Header headerObj = new Header();
+
 	public String getM(){
-		return requestModel.getM();
+		return request.getM();
 	}
 	
 	public String getC(){
-		return requestModel.getC();
+		return request.getC();
 	}
 	
 	public void setMList(List<String> mList){
-		requestModel.setMList(mList);
+		request.setMList(mList);
 	}
 	
-	public Request getRequest(){
-		return requestModel.getRequest();
+	public LinkedHashMap<String, Object> getRequest(){
+		return request.getP();
 	}
 	
 	public Boolean isHeaderValid(){
-		return header.isValid();
+		headerObj.setHeaderMap(header);
+		return headerObj.isValid();
 	}
 	
 	public Boolean isRequestValid(){
-		return requestModel.isValid();
+		return request.isValid();
 	}
 	
 	public String getReqErrInfo(){
-		return requestModel.getErrInfo();
+		return request.getErrInfo();
 	}
 	
+	@Override
+	public String toString(){
+		return  header.toString() 
+				+"\n"+ 
+				request.toString();
+	}
 	
 	@Data
 	class RequestModel {
+		@Expose
 		private String c;
+		@Expose
 		private String m;
-		private Request request;
+		@Expose
+		private LinkedHashMap<String, Object> p;
 		
 		private List<String> mList;
 		
@@ -57,9 +74,11 @@ public class InputGM {
 				return "the 'c' is invalid; ";
 			if (!mList.contains(m))
 				return "the 'm' is invalid; ";
-			if (!request.isValid())
-				return request.getReqErrInfo();
+			if (!RequestHelper.checkRequestP(m, p))
+				return RequestHelper.getErrInfoByRequestP(m, p);
 			return null;
 		}
+		
 	}
+	
 }

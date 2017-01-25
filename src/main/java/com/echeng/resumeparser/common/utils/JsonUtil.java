@@ -11,7 +11,8 @@ import com.google.gson.GsonBuilder;
 public class JsonUtil {
 	private static Gson gson_sta;
 	private static Gson gson_cop;
-    private static final Gson gson = new Gson();
+    private static final Gson gson_expose = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    private static final Gson gson_normal = new Gson();
 	
 	static{
 		gson_cop = new GsonBuilder()
@@ -49,27 +50,62 @@ public class JsonUtil {
 	}
 	
 	// ===========普通 包装================
-	@SuppressWarnings("unchecked")
     public static LinkedHashMap<String, Object> parseLinkedHashMap(Object obj) {
-        return (LinkedHashMap<String, Object>) gson.fromJson(obj.toString(), LinkedHashMap.class);
+		return parseLinkedHashMap(obj, false);
+    }
+	@SuppressWarnings("unchecked")
+    public static LinkedHashMap<String, Object> parseLinkedHashMap(Object obj, Boolean isExposed) {
+		if (isExposed)
+			return (LinkedHashMap<String, Object>) gson_expose.fromJson(obj.toString(), LinkedHashMap.class);
+		else
+			return (LinkedHashMap<String, Object>) gson_normal.fromJson(obj.toString(), LinkedHashMap.class);
     }
 
-    @SuppressWarnings("unchecked")
+
 	public static HashMap<String, Object> parseHashMap(Object obj) {
-        return (HashMap<String, Object>) gson.fromJson(obj.toString(), HashMap.class);
+        return parseHashMap(obj, false);
     }
+    @SuppressWarnings("unchecked")
+	public static HashMap<String, Object> parseHashMap(Object obj, Boolean isExposed) {
+    	if (isExposed)
+			return (HashMap<String, Object>) gson_expose.fromJson(obj.toString(), HashMap.class);
+    	else
+			return (HashMap<String, Object>) gson_normal.fromJson(obj.toString(), HashMap.class);
+    }
+
 
     public static String toJson(Object obj) {
-        return gson.toJson(obj);
+        return toJson(obj, false);
     }
+    public static String toJson(Object obj, Boolean isExposed) {
+    	if (isExposed)
+			return gson_expose.toJson(obj);
+    	else
+			return gson_normal.toJson(obj);
+    }
+
 
     public static <T> T fromJson(String jsonStr, Class<T> classOfT) {
-        return gson.fromJson(jsonStr, classOfT);
+        return fromJson(jsonStr, classOfT, false);
+    }
+    public static <T> T fromJson(String jsonStr, Class<T> classOfT, Boolean isExposed) {
+    	if (isExposed)
+			return gson_expose.fromJson(jsonStr, classOfT);
+    	else
+			return gson_normal.fromJson(jsonStr, classOfT);
     }
 
+
     public static Object fromJson(String jsonStr, Type type) {
-        return gson.fromJson(jsonStr, type);
+        return fromJson(jsonStr, type, false);
     }
+    public static Object fromJson(String jsonStr, Type type, Boolean isExposed) {
+    	if (isExposed)
+			return gson_expose.fromJson(jsonStr, type);
+    	else
+			return gson_normal.fromJson(jsonStr, type);
+    }
+
 
 	// ========resume 相关========
 	public static Resume jsonToResume(String json){
