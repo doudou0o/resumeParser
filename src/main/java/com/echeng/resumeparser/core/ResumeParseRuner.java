@@ -18,7 +18,7 @@ public class ResumeParseRuner {
 	//private ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/mainComponent.xml");
 	private ApplicationContext ctx = new ClassPathXmlApplicationContext(Constant.SPRING_FILE);
 	
-	public void run(Resume resume){
+	public ResumeParseResult run(Resume resume){
 		resume.setExt(ResumeUtil.getExtFromResume(resume));
 
 		//read
@@ -45,7 +45,8 @@ public class ResumeParseRuner {
 		String completeJson = JsonUtil.resumeToJson(finalResume, false);
 		parseRet.setStandardJson(standardJson);
 		parseRet.setStandardJson(completeJson);
-
+		
+		return parseRet;
 	}
 
 

@@ -27,7 +27,7 @@ public class RequestHelper {
 		for (Class<IRequest> req : RequestHelper.getAllReqClass()){
 			try {
 				Method isMmatchFunc = req.getMethod("isMethodMatch", String.class);
-				Method getMatchInfoFunc = req.getMethod("getRequestMatchInfo", String.class);
+				Method getMatchInfoFunc = req.getMethod("getRequestMatchInfo", Map.class);
 				if( (Boolean) isMmatchFunc.invoke(null, m) ){
 					M_matched = true;
 					String ans = (String) getMatchInfoFunc.invoke(null, reqDict);

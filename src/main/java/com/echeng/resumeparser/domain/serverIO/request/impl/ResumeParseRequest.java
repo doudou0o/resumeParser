@@ -2,6 +2,7 @@ package com.echeng.resumeparser.domain.serverIO.request.impl;
 
 import java.util.Map;
 
+import com.echeng.resumeparser.common.Constant;
 import com.echeng.resumeparser.domain.serverIO.request.IRequest;
 
 import lombok.Data;
@@ -12,7 +13,7 @@ import lombok.Data;
  */
 public class ResumeParseRequest implements IRequest {
 	
-	private static final String MNAME = "resume_parse";
+	private static final String MNAME = Constant.M_RESUMEPARSE;
 	
 	private String groupName;
 	private String fileName;
@@ -28,6 +29,12 @@ public class ResumeParseRequest implements IRequest {
 	}
 	// must implement
 	public static String getRequestMatchInfo(Map<String,Object> reqDicP){
+		if (null == reqDicP)
+			return "no request parameters";
+		if (!reqDicP.containsKey("groupname") || "".equals(reqDicP.get("groupname")))
+			return "no 'groupname' in request parameters";
+		if (!reqDicP.containsKey("filename") || "".equals(reqDicP.get("filename")))
+			return "no 'filename' in request parameters";
 		return null;
 	}
 	

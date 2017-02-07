@@ -64,7 +64,7 @@ public class InputGM {
 		private LinkedHashMap<String, Object> p;
 		
 		private List<String> mList;
-		
+
 		public Boolean isValid(){
 			return (null != getErrInfo());
 		}

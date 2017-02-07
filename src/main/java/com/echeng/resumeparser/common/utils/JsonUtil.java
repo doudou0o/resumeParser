@@ -9,22 +9,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class JsonUtil {
+	//
 	private static Gson gson_sta;
 	private static Gson gson_cop;
-    private static final Gson gson_expose = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-    private static final Gson gson_normal = new Gson();
 	
 	static{
 		gson_cop = new GsonBuilder()
 		        // 序列化null
 		        .serializeNulls()
-		        // 设置日期时间格式，另有2个重载方法
-		        // 在序列化和反序化时均生效
+		        // 设置日期时间格式，在序列化和反序化时均生效
 		        .setDateFormat("yyyy年MM月dd日")
 		        // 禁此序列化内部类
 		        .disableInnerClassSerialization()
-		        // 生成不可执行的Json（多了 )]}' 这4个字符）
-		        //.generateNonExecutableJson()
 		        // 禁止转义html标签
 		        .disableHtmlEscaping()
 		        // 格式化输出
@@ -35,17 +31,16 @@ public class JsonUtil {
 				.excludeFieldsWithoutExposeAnnotation()
 				// 序列化null
 		        .serializeNulls()
-		        // 设置日期时间格式，另有2个重载方法
-		        // 在序列化和反序化时均生效
+		        // 设置日期时间格式，在序列化和反序化时均生效
 		        .setDateFormat("yyyy年MM月dd日")
-		        // 禁此序列化内部类
-		        .disableInnerClassSerialization()
-		        // 生成不可执行的Json（多了 )]}' 这4个字符）
-		        //.generateNonExecutableJson()
 		        // 禁止转义html标签
 		        .disableHtmlEscaping()
 		        // 格式化输出
 		        .setPrettyPrinting()
+		        // 禁此序列化内部类
+		        //.disableInnerClassSerialization()
+		        // 生成不可执行的Json（会在最后多出 )]}' 这4个字符）
+		        //.generateNonExecutableJson()
 		        .create();
 	}
 	
@@ -56,9 +51,9 @@ public class JsonUtil {
 	@SuppressWarnings("unchecked")
     public static LinkedHashMap<String, Object> parseLinkedHashMap(Object obj, Boolean isExposed) {
 		if (isExposed)
-			return (LinkedHashMap<String, Object>) gson_expose.fromJson(obj.toString(), LinkedHashMap.class);
+			return (LinkedHashMap<String, Object>) gson_sta.fromJson(obj.toString(), LinkedHashMap.class);
 		else
-			return (LinkedHashMap<String, Object>) gson_normal.fromJson(obj.toString(), LinkedHashMap.class);
+			return (LinkedHashMap<String, Object>) gson_cop.fromJson(obj.toString(), LinkedHashMap.class);
     }
 
 
@@ -68,9 +63,9 @@ public class JsonUtil {
     @SuppressWarnings("unchecked")
 	public static HashMap<String, Object> parseHashMap(Object obj, Boolean isExposed) {
     	if (isExposed)
-			return (HashMap<String, Object>) gson_expose.fromJson(obj.toString(), HashMap.class);
+			return (HashMap<String, Object>) gson_sta.fromJson(obj.toString(), HashMap.class);
     	else
-			return (HashMap<String, Object>) gson_normal.fromJson(obj.toString(), HashMap.class);
+			return (HashMap<String, Object>) gson_cop.fromJson(obj.toString(), HashMap.class);
     }
 
 
@@ -79,9 +74,9 @@ public class JsonUtil {
     }
     public static String toJson(Object obj, Boolean isExposed) {
     	if (isExposed)
-			return gson_expose.toJson(obj);
+			return gson_sta.toJson(obj);
     	else
-			return gson_normal.toJson(obj);
+			return gson_cop.toJson(obj);
     }
 
 
@@ -90,9 +85,9 @@ public class JsonUtil {
     }
     public static <T> T fromJson(String jsonStr, Class<T> classOfT, Boolean isExposed) {
     	if (isExposed)
-			return gson_expose.fromJson(jsonStr, classOfT);
+			return gson_sta.fromJson(jsonStr, classOfT);
     	else
-			return gson_normal.fromJson(jsonStr, classOfT);
+			return gson_cop.fromJson(jsonStr, classOfT);
     }
 
 
@@ -101,9 +96,9 @@ public class JsonUtil {
     }
     public static Object fromJson(String jsonStr, Type type, Boolean isExposed) {
     	if (isExposed)
-			return gson_expose.fromJson(jsonStr, type);
+			return gson_sta.fromJson(jsonStr, type);
     	else
-			return gson_normal.fromJson(jsonStr, type);
+			return gson_cop.fromJson(jsonStr, type);
     }
 
 

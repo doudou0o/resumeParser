@@ -14,7 +14,7 @@ public class ResumeElementFilterRequest implements IRequest {
 	}
 	// must implement
 	public static String getRequestMatchInfo(Map<String,Object> reqDicP){
-		return null;
+		return "wrong";
 	}
 		
 	@Override
