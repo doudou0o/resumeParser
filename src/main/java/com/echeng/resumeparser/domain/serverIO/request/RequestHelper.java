@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.echeng.resumeparser.common.log.Logger;
 import com.echeng.resumeparser.common.log.LoggerFactory;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
 
 public class RequestHelper {
 	
@@ -73,6 +75,10 @@ public class RequestHelper {
 			}
 		}
 		return reqClses;
+	}
+
+	public static IRequest buildResumeParseReq(LinkedHashMap<String, Object> reqDict) {
+		return new ResumeParseRequest(reqDict);
 	}
 	
 }

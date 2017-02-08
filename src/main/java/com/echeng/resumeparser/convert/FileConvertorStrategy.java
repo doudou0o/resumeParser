@@ -1,7 +1,12 @@
 package com.echeng.resumeparser.convert;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import com.echeng.resumeparser.common.Constant;
 import com.echeng.resumeparser.convert.convertors.DocConvertor;
+import com.echeng.resumeparser.convert.convertors.HtmlConvertor;
 import com.echeng.resumeparser.convert.convertors.PdfConvertor;
 import com.echeng.resumeparser.convert.convertors.TxtConvertor;
 
@@ -10,44 +15,43 @@ import com.echeng.resumeparser.convert.convertors.TxtConvertor;
  * 所有被代理器临时获取
  *
  */
-public class FileConvertorStrategy implements IFileConvertor {
+public class FileConvertorStrategy{
 
-	private IFileConvertor m_FileConvector;
 
-	public FileConvertorStrategy(String ext){
-		if (Constant.TXT.equals(ext)){
-			m_FileConvector = new TxtConvertor();
-		}
-		if (Constant.DOC.equals(ext)){
-			m_FileConvector = new DocConvertor();
-		}
-		if (Constant.PDF.equals(ext)){
-			m_FileConvector = new PdfConvertor();
-		}
-	}
-
-	public void feed(byte[] fileBytes) {
-		m_FileConvector.feed(fileBytes);
-	}
-
-	public void convert() {
-		m_FileConvector.convert();		
+	public String convert2Str(byte[] fileBytes, String ext, Map<String, Object> options){
+		IFileConvertor convertor = getConvertorInstance(ext);
+		convertor.feed(fileBytes);
+		convertor.setOptions(options);
+		convertor.convert();
+		//convertor.getFeatures();
+		String fileContent = convertor.getFileContent();
+		return fileContent;
 	}
 	
-	public void convert(byte[] fileBytes) {
-		m_FileConvector.convert(fileBytes);
+	public List<String> convert2Lines(byte[] fileBytes, String ext, Map<String, Object> options){
+		return Arrays.asList(convert2Str(fileBytes, ext, options).split("\n"));
 	}
 
-	public void setSaveFeasture(Boolean isSave) {
-		m_FileConvector.setSaveFeasture(isSave);
-	}
-
-	public String getFileContent() {
-		return m_FileConvector.getFileContent();
-	}
-
-	public String getLineFeature() {
-		return m_FileConvector.getLineFeature();
+	/*
+	 * Temporarily:
+	 * Every time invoked, the function will return a new instance.
+	 * It will make a great number of memory fragmentation when frequently invoke.
+	 * #TODO will make a instance pool to prevent.
+	 */
+	private IFileConvertor getConvertorInstance(String ext) {
+		if (Constant.TXT.equals(ext)){
+			return new TxtConvertor();
+		}
+		if (Constant.DOC.equals(ext)){
+			return new DocConvertor();
+		}
+		if (Constant.PDF.equals(ext)){
+			return new PdfConvertor();
+		}
+		if (Constant.HTML.equals(ext)){
+			return new HtmlConvertor();
+		}
+		return new TxtConvertor();
 	}
 
 }

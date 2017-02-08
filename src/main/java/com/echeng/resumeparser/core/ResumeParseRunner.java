@@ -1,5 +1,7 @@
 package com.echeng.resumeparser.core;
 
+import javax.annotation.Resource;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -7,37 +9,46 @@ import com.echeng.resumeparser.common.Constant;
 import com.echeng.resumeparser.common.utils.JsonUtil;
 import com.echeng.resumeparser.common.utils.ResumeUtil;
 import com.echeng.resumeparser.convert.FileConvertorStrategy;
-import com.echeng.resumeparser.convert.IFileConvertor;
 import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
 import com.echeng.resumeparser.merge.ResumesMerge;
 import com.echeng.resumeparser.parser.ParserPool;
 import com.echeng.resumeparser.resumeInput.IResumeReaderStrategy;
 
-public class ResumeParseRuner {
-	//private ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/mainComponent.xml");
-	private ApplicationContext ctx = new ClassPathXmlApplicationContext(Constant.SPRING_FILE);
+public class ResumeParseRunner {
 	
-	public ResumeParseResult run(Resume resume){
+	@Resource(name="resumeReaderStrategy")
+	private IResumeReaderStrategy resumeReader;
+	
+	@Resource(name="fileConvertorStrategy")
+	private FileConvertorStrategy fileConvertor;
+	
+	@Resource(name="resumesMerge")
+	private ResumesMerge resumeMerger;
+
+	
+	public ResumeParseResult run(ResumeParseRequest req){
+		return run(buildOriResume(req), req);
+	}
+	
+	public ResumeParseResult run(Resume resume, ResumeParseRequest req){
+		
 		resume.setExt(ResumeUtil.getExtFromResume(resume));
 
 		//read
-		//ResumeReaderStrategy resumeReader = new ResumeReaderStrategy(resume.getGroupName());
-		IResumeReaderStrategy resumeReader = (IResumeReaderStrategy) ctx.getBean("resumeReaderStrategy");
-		resumeReader.readResume(resume.getGroupName(), resume.getFileName());
-		resume.setFileOri(resumeReader.getOriFile());
+		byte[] oriFileBytes = resumeReader.readResume(resume.getGroupName(), resume.getFileName());
+		resume.setFileOri(oriFileBytes);
 
 		//convert
-		IFileConvertor convertor = new FileConvertorStrategy(resume.getExt());
-		convertor.feed(resume.getFileOri());
-		convertor.convert();
-		resume.setContent(convertor.getFileContent());
+		String fileContent = fileConvertor.convert2Str(resume.getFileOri(), resume.getExt(), null);//TODO --null
+		resume.setContent(fileContent);
 
 		//parse
 		ResumeParseResult parseRet = new ParserPool().parse(resume);
 
 		//merge
-		Resume finalResume = ResumesMerge.merge(parseRet.getCandResumes());
+		Resume finalResume = resumeMerger.merge(parseRet.getCandResumes());
 		parseRet.setFinalResume(finalResume);
 
 		//json
@@ -49,9 +60,17 @@ public class ResumeParseRuner {
 		return parseRet;
 	}
 
+	private Resume buildOriResume(ResumeParseRequest req){
+		return new Resume(req.getFileName(), req.getGroupName());
+	}
+	
+	
 
+	//test
 	public static void main(String[] args) {
 		//BasicConfigurator.configure();
-		new ResumeParseRuner().run(new Resume("testResume/test.txt","local"));
+		ApplicationContext ctx = new ClassPathXmlApplicationContext(Constant.SPRING_FILE);
+		ResumeParseRequest mock = new ResumeParseRequest();
+		new ResumeParseRunner().run(new Resume("testResume/test.txt","local"), mock);
 	}
 }

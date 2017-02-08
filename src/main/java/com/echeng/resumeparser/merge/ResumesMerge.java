@@ -5,7 +5,8 @@ import java.util.List;
 import com.echeng.resumeparser.domain.resume.Resume;
 
 public class ResumesMerge {
-	public static Resume merge(List<Resume> resumeList){
+
+	public Resume merge(List<Resume> resumeList){
 		return null;
 	}
 }
