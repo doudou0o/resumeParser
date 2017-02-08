@@ -14,9 +14,8 @@
 	
 	<!-- ====== resume reader strategy ====== -->
 	<bean id='resumeReaderStrategy'
-		class="com.echeng.resumeparser.resumeInput.ResumeReaderStrategy2"
-		scope="prototype" >
-		<constructor-arg type="java.lang.String" value="default"/>
+		class="com.echeng.resumeparser.resumeInput.ResumeReaderStrategy2">
+		<constructor-arg type="java.lang.String" value="local"/>
     </bean>
 
 

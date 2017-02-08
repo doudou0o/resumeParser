@@ -2,21 +2,14 @@ package com.echeng.resumeparser.resumeInput;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
 
 /**
  * 策略模式
  * 所有的策略临时获取
  */
 public class ResumeReaderStrategy2 implements IResumeReaderStrategy {
-	
-	private String filepath;
-	private String groupname;
-	private byte[] fileBytes;
-	
-	private IResumeReader m_ResumeReader;
+
+	private String default_groupname;
 	
 //	@Autowired //由于Resource(j2ee提供)比Autowired(spring提供)更快
 //	@Qualifier("fileReader")
@@ -27,35 +20,25 @@ public class ResumeReaderStrategy2 implements IResumeReaderStrategy {
 	@Resource(name="dfsReader")
 	private IResumeReader resumeDfsReader;
 	
-	public ResumeReaderStrategy2(){}
+	public ResumeReaderStrategy2(){
+		this.default_groupname = "local";
+	}
 
 	public ResumeReaderStrategy2(String groupname){
-		this.m_ResumeReader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
-		this.groupname = groupname;
+		this.default_groupname = groupname;
 	}
 	
 	@Override
-	public void readResume(String filepath){
-		this.filepath = filepath;
-		fileBytes = m_ResumeReader.readResume(this.filepath, groupname);
+	public byte[] readResume(String filepath){
+		return readResume(this.default_groupname, filepath);
 	}
 	
 	@Override
-	public void readResume(String groupname, String filepath){
-		setGroupname(groupname);
-		readResume(filepath);
+	public byte[] readResume(String groupname, String filepath){
+		IResumeReader reader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
+		return reader.readResume(filepath, groupname);
 	}
 
-	@Override
-	public byte[] getOriFile(){
-		return fileBytes;
-	}
-	
-	@Override
-	public void setGroupname(String groupname){
-		this.m_ResumeReader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
-		this.groupname = groupname;
-	}
 
 	private IResumeReader getInstanceResumeReader(ResumeInputType resumeInputType) {
 		switch (resumeInputType) {

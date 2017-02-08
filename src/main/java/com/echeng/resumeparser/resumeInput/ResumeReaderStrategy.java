@@ -10,40 +10,28 @@ import com.echeng.resumeparser.resumeInput.readers.ResumeHttpReader;
  */
 public class ResumeReaderStrategy implements IResumeReaderStrategy {
 
-	private IResumeReader m_ResumeReader;
-	private String filepath;
-	private String groupname;
-	
-	private byte[] fileBytes;
-	
-	public ResumeReaderStrategy(){}
+
+	private String default_groupname;
+
+	public ResumeReaderStrategy(){
+		this.default_groupname = "local";
+	}
 	
 	public ResumeReaderStrategy(String groupname){
-		this.m_ResumeReader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
+		this.default_groupname = groupname;
 	}
 	
 	@Override
-	public void readResume(String filepath){
-		this.filepath = filepath;
-		fileBytes = m_ResumeReader.readResume(this.filepath, groupname);
+	public byte[] readResume(String filepath){
+		return readResume(this.default_groupname, filepath);
 	}
 	
 	@Override
-	public void readResume(String groupname, String filepath){
-		setGroupname(groupname);
-		readResume(filepath);
+	public byte[] readResume(String groupname, String filepath){
+		IResumeReader reader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
+		return reader.readResume(filepath, groupname);
 	}
 	
-	@Override
-	public void setGroupname(String groupname) {
-		this.groupname = groupname;
-		this.m_ResumeReader = getInstanceResumeReader(ResumeInputType.getResumeInputType(groupname));
-	}
-
-	@Override
-	public byte[] getOriFile(){
-		return fileBytes;
-	}
 
 	private IResumeReader getInstanceResumeReader(ResumeInputType resumeInputType) {
 		switch (resumeInputType) {
