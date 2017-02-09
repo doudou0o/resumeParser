@@ -2,13 +2,13 @@ package com.echeng.resumeparser.convert;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.echeng.resumeparser.common.Constant;
 import com.echeng.resumeparser.convert.convertors.DocConvertor;
 import com.echeng.resumeparser.convert.convertors.HtmlConvertor;
 import com.echeng.resumeparser.convert.convertors.PdfConvertor;
 import com.echeng.resumeparser.convert.convertors.TxtConvertor;
+import com.echeng.resumeparser.domain.serverIO.ConvertOption;
 
 /**
  * 代理模式
@@ -18,7 +18,7 @@ import com.echeng.resumeparser.convert.convertors.TxtConvertor;
 public class FileConvertorStrategy{
 
 
-	public String convert2Str(byte[] fileBytes, String ext, Map<String, Object> options){
+	public String convert2Str(byte[] fileBytes, String ext, ConvertOption options){
 		IFileConvertor convertor = getConvertorInstance(ext);
 		convertor.feed(fileBytes);
 		convertor.setOptions(options);
@@ -28,7 +28,7 @@ public class FileConvertorStrategy{
 		return fileContent;
 	}
 	
-	public List<String> convert2Lines(byte[] fileBytes, String ext, Map<String, Object> options){
+	public List<String> convert2Lines(byte[] fileBytes, String ext, ConvertOption options){
 		return Arrays.asList(convert2Str(fileBytes, ext, options).split("\n"));
 	}
 

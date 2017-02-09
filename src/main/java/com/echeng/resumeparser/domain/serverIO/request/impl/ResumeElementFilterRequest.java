@@ -23,15 +23,5 @@ public class ResumeElementFilterRequest implements IRequest {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	public Boolean hasParameter(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Object getParameterValue(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

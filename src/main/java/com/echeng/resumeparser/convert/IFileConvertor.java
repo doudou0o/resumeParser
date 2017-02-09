@@ -1,13 +1,13 @@
 package com.echeng.resumeparser.convert;
 
-import java.util.Map;
+import com.echeng.resumeparser.domain.serverIO.ConvertOption;
 
 public interface IFileConvertor {
 	public void init();
 	public void feed(byte[] fileBytes);
 	public void convert(byte[] fileBytes);
 	public void convert();
-	public void setOptions(Map<String, Object> options);
+	public void setOptions(ConvertOption options);
 	public String getFileContent();
 	//public String getFeatures();
 }

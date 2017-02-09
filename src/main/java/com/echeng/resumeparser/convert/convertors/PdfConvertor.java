@@ -1,8 +1,8 @@
 package com.echeng.resumeparser.convert.convertors;
 
-import java.util.Map;
 
 import com.echeng.resumeparser.convert.IFileConvertor;
+import com.echeng.resumeparser.domain.serverIO.ConvertOption;
 
 public class PdfConvertor implements IFileConvertor {
 
@@ -31,7 +31,7 @@ public class PdfConvertor implements IFileConvertor {
 	}
 
 	@Override
-	public void setOptions(Map<String, Object> options) {
+	public void setOptions(ConvertOption options) {
 		// TODO Auto-generated method stub
 		
 	}

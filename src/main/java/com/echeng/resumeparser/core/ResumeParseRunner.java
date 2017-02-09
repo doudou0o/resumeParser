@@ -13,7 +13,7 @@ import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
 import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
 import com.echeng.resumeparser.merge.ResumesMerge;
-import com.echeng.resumeparser.parser.ParserPool;
+import com.echeng.resumeparser.parser.ResumeParserStrategy;
 import com.echeng.resumeparser.resumeInput.IResumeReaderStrategy;
 
 public class ResumeParseRunner {
@@ -23,6 +23,9 @@ public class ResumeParseRunner {
 	
 	@Resource(name="fileConvertorStrategy")
 	private FileConvertorStrategy fileConvertor;
+	
+	@Resource(name="resumeParserStrategy")
+	private ResumeParserStrategy resumeParser;
 	
 	@Resource(name="resumesMerge")
 	private ResumesMerge resumeMerger;
@@ -41,14 +44,14 @@ public class ResumeParseRunner {
 		resume.setFileOri(oriFileBytes);
 
 		//convert
-		String fileContent = fileConvertor.convert2Str(resume.getFileOri(), resume.getExt(), null);//TODO --null
+		String fileContent = fileConvertor.convert2Str(resume.getFileOri(), resume.getExt(), req.getConvertOptions());
 		resume.setContent(fileContent);
 
 		//parse
-		ResumeParseResult parseRet = new ParserPool().parse(resume);
+		ResumeParseResult parseRet = resumeParser.parse(resume, req.getParseOptions());
 
 		//merge
-		Resume finalResume = resumeMerger.merge(parseRet.getCandResumes());
+		Resume finalResume = resumeMerger.merge(parseRet.getCandResumes(), req.getMergeOptions());
 		parseRet.setFinalResume(finalResume);
 
 		//json
