@@ -15,7 +15,7 @@
 
 	<!-- 各个runner -->
 	<!-- runner must be prototype -->
-	<bean id='resumeParseRuner' class="com.echeng.resumeparser.core.ResumeParseRuner" scope="prototype">
+	<bean id='resumeParseRunner' class="com.echeng.resumeparser.core.ResumeParseRunner" scope="prototype">
 	</bean>
 
 

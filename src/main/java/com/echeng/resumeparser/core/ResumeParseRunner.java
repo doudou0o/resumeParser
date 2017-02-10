@@ -66,14 +66,5 @@ public class ResumeParseRunner {
 	private Resume buildOriResume(ResumeParseRequest req){
 		return new Resume(req.getFileName(), req.getGroupName());
 	}
-	
-	
 
-	//test
-	public static void main(String[] args) {
-		//BasicConfigurator.configure();
-		ApplicationContext ctx = new ClassPathXmlApplicationContext(Constant.SPRING_FILE);
-		ResumeParseRequest mock = new ResumeParseRequest();
-		new ResumeParseRunner().run(new Resume("testResume/test.txt","local"), mock);
-	}
 }

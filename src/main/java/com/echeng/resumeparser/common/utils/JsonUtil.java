@@ -19,8 +19,6 @@ public class JsonUtil {
 		        .serializeNulls()
 		        // 设置日期时间格式，在序列化和反序化时均生效
 		        .setDateFormat("yyyy年MM月dd日")
-		        // 禁此序列化内部类
-		        .disableInnerClassSerialization()
 		        // 禁止转义html标签
 		        .disableHtmlEscaping()
 		        // 格式化输出

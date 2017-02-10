@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.echeng.resumeparser.common.log.Logger;
 import com.echeng.resumeparser.common.log.LoggerFactory;
+import com.echeng.resumeparser.common.utils.JsonUtil;
 import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
 
 public class RequestHelper {
@@ -78,7 +79,8 @@ public class RequestHelper {
 	}
 
 	public static IRequest buildResumeParseReq(LinkedHashMap<String, Object> reqDict) {
-		return new ResumeParseRequest(reqDict);
+		ResumeParseRequest req = JsonUtil.fromJson(JsonUtil.toJson(reqDict), ResumeParseRequest.class);
+		return req;
 	}
 	
 }

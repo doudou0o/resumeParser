@@ -37,10 +37,14 @@ public class ParseController {
 		// new one runner
 		ResumeParseRunner resumeParseRunner = (ResumeParseRunner) SpringContextsUtil.getBean("resumeParseRunner");
 		ResumeParseResult result = resumeParseRunner.run((ResumeParseRequest) req);
+		
+		// print log result
+		logger.debug("standard result:\n"+result.getStandardJson());
+		logger.debug("complete result:\n"+result.getCompleteJson());
+		logger.debug("parse info:\n"+result.getParseInfo());
 
-		//TODO
-		IResponse resp = new ResumeParseResponse();
-		//resp.setResults(results);
+		ResumeParseResponse resp = new ResumeParseResponse();
+		resp.setResults(result.getFinalResume());
 		return resp;
 	}
 

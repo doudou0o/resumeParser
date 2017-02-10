@@ -1,6 +1,5 @@
 package com.echeng.resumeparser.domain.serverIO.request.impl;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.echeng.resumeparser.common.Constant;
@@ -8,6 +7,7 @@ import com.echeng.resumeparser.domain.serverIO.ConvertOption;
 import com.echeng.resumeparser.domain.serverIO.MergeOption;
 import com.echeng.resumeparser.domain.serverIO.ParseOption;
 import com.echeng.resumeparser.domain.serverIO.request.IRequest;
+import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
@@ -40,10 +40,15 @@ public class ResumeParseRequest implements IRequest {
 	
 	private Map<String,Object> m_reqDicP;
 	
+	@SerializedName("groupname")
 	private String groupName;
+	@SerializedName("filename")
 	private String fileName;
+	@SerializedName("resumename")
 	private String resumeName;
+	@SerializedName("filecontent")
 	private byte[] fileContent;
+	@SerializedName("option")
 	private Options option;
 	
 	private ConvertOption ct_op;
@@ -52,10 +57,6 @@ public class ResumeParseRequest implements IRequest {
 	
 	public ResumeParseRequest(){};
 	
-	public ResumeParseRequest(LinkedHashMap<String, Object> reqDict) {
-		this.buildRequest(reqDict);
-	}
-
 
 	@Override
 	public void buildRequest(Map<String, Object> reqDict) {
@@ -96,15 +97,61 @@ public class ResumeParseRequest implements IRequest {
 	@Data
 	class Options {
 		// run type
+		@SerializedName("run_type")
 		private Integer runType = 0;
+		
 		// max time out -- means must return before timeOut is up
+		@SerializedName("time_out")
 		private long timeOut = 0;
+		
 		// need filter name or not (default is false)
+		@SerializedName("is_filter_name")
 		private Integer isFilterName = 0;
+		
 		// constraint_degree
+		@SerializedName("constraint_degree")
 		private Integer constraint_degree = 0;
+		
 		// need feature when convert
+		@SerializedName("is_need_feature")
 		private Integer isNeedFeature = 0;
+		
+		
+		private static final int DEFAULT_RUNTYPE = 0;
+		private static final long DEFAULT_TIMEOUT = 0;
+		private static final int DEFAULT_ISFILTERNAME = 0;
+		private static final int DEFAULT_CONSTRAINT_DEGREE = 0;
+		private static final int DEFAULT_ISNEEDFEATURE = 0;
+		
+		public Integer getRunType(){
+			if (runType == null)
+				runType = DEFAULT_RUNTYPE;
+			return runType;
+		}
+		
+		public long getTimeOut(){
+			if (timeOut < 0)
+				timeOut = DEFAULT_TIMEOUT;
+			return timeOut;
+		}
+		
+		public Integer getIsFilterName(){
+			if (isFilterName == null)
+				isFilterName = DEFAULT_ISFILTERNAME;
+			return isFilterName;
+		}
+		
+		public Integer getConstraint_degree(){
+			if (constraint_degree == null)
+				constraint_degree = DEFAULT_CONSTRAINT_DEGREE;
+			return constraint_degree;
+		}
+		
+		public Integer getIsNeedFeature(){
+			if (isNeedFeature == null)
+				isNeedFeature = DEFAULT_ISNEEDFEATURE;
+			return isNeedFeature;
+		}
 	}
 }
 

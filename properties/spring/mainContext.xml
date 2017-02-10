@@ -13,8 +13,7 @@
 
 	<context:annotation-config />
 	
-
-	<bean id='ParserPool' class="com.echeng.resumeparser.parser.ParserPool"></bean>
+	<bean id="SpringContextsUtil " class="com.echeng.resumeparser.common.utils.SpringContextsUtil"  lazy-init="false"/>
 
 	<aop:config>
 		<aop:advisor id="MethodOutputLog1" advice-ref="MethodOutputLog"
@@ -30,11 +29,14 @@
    	<!-- controller -->
 	<bean id='control' class="com.echeng.resumeparser.core.ParseController" />
 	
+	<!-- merge -->
+	<bean id="resumesMerge" class="com.echeng.resumeparser.merge.ResumesMerge" />
    	
    	<!-- 配置bean文件 -->
     <import resource="classpath:properties/spring/bean_*.xml" />
     
     <!-- 配置AOP文件 -->
     <import resource="classpath:properties/spring/aop_*.xml" />
+
 </beans>
  
