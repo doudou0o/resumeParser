@@ -8,6 +8,8 @@ import com.echeng.resumeparser.domain.serverIO.MergeOption;
 public class ResumesMerge {
 
 	public Resume merge(List<Resume> resumeList, MergeOption options){
+		if (resumeList != null && resumeList.size() > 0)
+			return resumeList.get(0);
 		return null;
 	}
 }
