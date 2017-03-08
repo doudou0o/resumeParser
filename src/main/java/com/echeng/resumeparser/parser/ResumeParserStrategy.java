@@ -12,12 +12,15 @@ import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
 import com.echeng.resumeparser.domain.serverIO.ParseOption;
 import com.echeng.resumeparser.parser.five1Parser.Five1ParserPool;
+import com.echeng.resumeparser.parser.geneParser.GeneralParserPool;
 import com.echeng.resumeparser.parser.zhaopinParser.ZhaopinParserPool;
 
 public class ResumeParserStrategy {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ResumeParserStrategy.class);
 	
+	@Resource
+	private GeneralParserPool generalParserPool;
 	@Resource
 	private Five1ParserPool five1ParserPool;
 	@Resource
@@ -30,6 +33,7 @@ public class ResumeParserStrategy {
 	
 		tasks.add(five1ParserPool.parse(resume, options, ret));
 		tasks.add(zhaopinParserPool.parse(resume, options, ret));
+		tasks.add(generalParserPool.parse(resume, options, ret));
 
 		waitandkill(tasks, options.getTimeOut());
 
