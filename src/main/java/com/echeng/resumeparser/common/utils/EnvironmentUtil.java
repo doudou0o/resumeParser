@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.echeng.resumeparser.common.log.Logger;
 import com.echeng.resumeparser.common.log.LoggerFactory;
+import com.echeng.resumeparser.common.utils.gearmanTools.GMDNSConfFileUtil;
 
 import lombok.Data;
 

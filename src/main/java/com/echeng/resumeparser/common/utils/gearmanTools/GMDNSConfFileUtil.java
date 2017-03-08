@@ -1,4 +1,4 @@
-package com.echeng.resumeparser.common.utils;
+package com.echeng.resumeparser.common.utils.gearmanTools;
 
 import java.io.File;
 import java.io.IOException;
