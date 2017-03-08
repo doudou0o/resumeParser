@@ -26,10 +26,16 @@
 		class="com.echeng.resumeparser.parser.five1Parser.Five1ParserPool" />
 	<bean id='five1Parser'
 		class="com.echeng.resumeparser.parser.five1Parser.Five1Parser" />
+		
 	<!-- zhaopin parser -->
 	<bean id='zhaopinParserPool'
 		class="com.echeng.resumeparser.parser.zhaopinParser.ZhaopinParserPool" />
+	<bean id='zhaopinParser'
+		class="com.echeng.resumeparser.parser.zhaopinParser.ZhaopinParser" />
+
 	<!-- general parser -->
+	<bean id='geneParserPool'
+		class="com.echeng.resumeparser.parser.geneParser.GeneralParserPool" />
 	<bean id='geneParser'
 		class="com.echeng.resumeparser.parser.geneParser.GeneralParser" />
 </beans>
