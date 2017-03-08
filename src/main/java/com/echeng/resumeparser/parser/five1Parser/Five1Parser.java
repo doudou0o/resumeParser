@@ -5,7 +5,7 @@ import com.echeng.resumeparser.domain.resume.Resume;
 import com.echeng.resumeparser.domain.serverIO.ParseOption;
 import com.echeng.resumeparser.parser.IResumeParser;
 
-public class Five1Parser implements IResumeParser, Runnable {
+public class Five1Parser implements IResumeParser {
 
 	@Override
 	public void run() {

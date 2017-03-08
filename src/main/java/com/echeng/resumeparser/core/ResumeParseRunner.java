@@ -2,10 +2,6 @@ package com.echeng.resumeparser.core;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.echeng.resumeparser.common.Constant;
 import com.echeng.resumeparser.common.utils.JsonUtil;
 import com.echeng.resumeparser.common.utils.ResumeUtil;
 import com.echeng.resumeparser.convert.FileConvertorStrategy;

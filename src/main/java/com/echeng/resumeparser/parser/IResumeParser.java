@@ -4,7 +4,7 @@ import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
 import com.echeng.resumeparser.domain.serverIO.ParseOption;
 
-public interface IResumeParser {
+public interface IResumeParser extends Runnable {
 	public void getParserName();
 	public void setOption(ParseOption options);
 	public void setParseResult(ResumeParseResult result);
