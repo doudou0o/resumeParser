@@ -22,11 +22,13 @@
 	<!-- ====== resume parsers ============== -->
 
 	<!-- five1 parser -->
+	<bean id='five1ParserPool'
+		class="com.echeng.resumeparser.parser.five1Parser.Five1ParserPool" />
 	<bean id='five1Parser'
 		class="com.echeng.resumeparser.parser.five1Parser.Five1Parser" />
 	<!-- zhaopin parser -->
-	<bean id='zhaopinParser'
-		class="com.echeng.resumeparser.parser.zhaopinParser.ZhaopinParser" />
+	<bean id='zhaopinParserPool'
+		class="com.echeng.resumeparser.parser.zhaopinParser.ZhaopinParserPool" />
 	<!-- general parser -->
 	<bean id='geneParser'
 		class="com.echeng.resumeparser.parser.geneParser.GeneralParser" />
