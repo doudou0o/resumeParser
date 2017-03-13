@@ -6,7 +6,9 @@ import com.echeng.resumeparser.domain.serverIO.ParseOption;
 import com.echeng.resumeparser.parser.IResumeParser;
 
 public class GeneralParser implements IResumeParser {
-
+	
+	private final String M_NAME = "generalparser";
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -14,9 +16,8 @@ public class GeneralParser implements IResumeParser {
 	}
 	
 	@Override
-	public void getParserName() {
-		// TODO Auto-generated method stub
-		
+	public String getParserName() {
+		return M_NAME;
 	}
 
 	@Override

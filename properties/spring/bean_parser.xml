@@ -39,3 +39,4 @@
 	<bean id='geneParser'
 		class="com.echeng.resumeparser.parser.geneParser.GeneralParser" />
 </beans>
+

@@ -7,6 +7,8 @@ import com.echeng.resumeparser.parser.IResumeParser;
 
 public class ZhaopinParser implements IResumeParser {
 
+	private final String M_NAME = "zhaopinparser";
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -14,9 +16,8 @@ public class ZhaopinParser implements IResumeParser {
 	}
 	
 	@Override
-	public void getParserName() {
-		// TODO Auto-generated method stub
-		
+	public String getParserName() {
+		return M_NAME;
 	}
 
 	@Override

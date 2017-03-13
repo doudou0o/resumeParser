@@ -28,7 +28,11 @@ public class Five1ParserPool implements IResumeParserPool {
 		parser.feed(resume);
 		parser.setParseResult(result);
 		parser.setOption(options);
-		return m_ParserPool.submit(parser);
+		
+		//4test
+		parser.run();
+		return null;
+		//return m_ParserPool.submit(parser);
 	}
 
 }
