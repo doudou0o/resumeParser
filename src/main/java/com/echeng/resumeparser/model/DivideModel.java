@@ -9,7 +9,7 @@ import com.echeng.resumeparser.model.divide.RegularDivider;
  * the model for dividing the content
  * 
  * @return the List<String> after dividing.
- * Each String is a block that begin with "====id====+++ oriHeadLine words +++\n"
+ * Each String is a block that begin with "===id,id...===+++name,name...+++\n"
  * Each String is segmented by "\n"
  *
  */

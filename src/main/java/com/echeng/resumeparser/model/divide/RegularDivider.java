@@ -56,24 +56,26 @@ public class RegularDivider implements IDivider {
 
 		// 标准标题：标题占一行
 		if (isHeadLine(curline) && !isNagtiveLastline(lastline) && !isHeadLine(nextline)) {
-			return Arrays.asList(RegularDividerHelper.generateNormalHeadLine(curline, getHandlineId(curline)));
+			return Arrays.asList(RegularDividerHelper.generateNormalHeadLine(getHandlineId(curline)), curline);
 		}
 
 		// 非标准标题：标题在行首
 		if (isSpecificHeadLine(curline, 0)!=null && !isNagtiveLastline(lastline) && !isHeadLine(nextline)) {
-			String[] newlines = new String[2];
+			String[] newlines = new String[3];
 			String headline = isSpecificHeadLine(curline, 0);
-			newlines[0] = RegularDividerHelper.generateNormalHeadLine(headline, getHandlineId(headline));
-			newlines[1] = curline.substring(curline.indexOf(headline)+curline.length());
+			newlines[0] = RegularDividerHelper.generateNormalHeadLine(getHandlineId(headline));
+			newlines[1] = headline;
+			newlines[2] = curline.substring(curline.indexOf(headline)+curline.length());
 			return Arrays.asList(newlines);
 		}
 
 		// 非标准标题：标题在行尾
 		if (isSpecificHeadLine(curline, 1)!=null && !isNagtiveLastline(curline) && !isHeadLine(nextline)) {
-			String[] newlines = new String[2];
+			String[] newlines = new String[3];
 			String headline = isSpecificHeadLine(curline, 1);
 			newlines[0] = curline.substring(0, curline.indexOf(headline));
-			newlines[1] = RegularDividerHelper.generateNormalHeadLine(headline, getHandlineId(headline));
+			newlines[1] = RegularDividerHelper.generateNormalHeadLine(getHandlineId(headline));
+			newlines[2] = headline;
 			return Arrays.asList(newlines);
 		}
 

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
 import com.echeng.resumeparser.common.utils.FileUtil;
@@ -33,6 +34,14 @@ public class RegularDividerHelper {
 		loadBasicHeadlinesDict();
 	}
 	
+	public static String getHandlineNamesByIds(Integer... ids){
+		StringJoiner sj = new StringJoiner(",");
+		for ( Integer id : ids ){
+			sj.add(headlinesMap_name.getOrDefault(id, "unknow"));
+		}
+		return sj.toString();
+	}
+	
 	public static Integer getHandlineId(String word){
 		if (word.length()<1 || !headlinesMap.containsKey(word))
 			return -1;
@@ -53,8 +62,8 @@ public class RegularDividerHelper {
 		return headlinesMap.containsKey(line);
 	}
 
-	public static String generateNormalHeadLine(String line, Integer... ids) {
-		return String.format("====%s====+++%s+++", StringUtil.join(",", ids), line);
+	public static String generateNormalHeadLine(Integer... ids) {
+		return String.format("===%s===+++%s+++", StringUtil.join(",", ids), getHandlineNamesByIds(ids));
 	}
 
 	public static boolean isNagtiveLastline(String line) {
