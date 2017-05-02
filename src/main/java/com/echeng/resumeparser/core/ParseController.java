@@ -13,18 +13,24 @@ import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
 import com.echeng.resumeparser.domain.serverIO.response.IResponse;
 import com.echeng.resumeparser.domain.serverIO.response.impl.ResumeParseResponse;
 
+/**
+ * the controller 
+ * 
+ *
+ */
 public class ParseController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ParseController.class);
 
-
 	public IResponse handle(String m, LinkedHashMap<String, Object> reqDict) {
-		if (Constant.M_NAMEFILTER.equals(m))
-			return resumeParse(reqDict);
-
-		if (Constant.M_RESUMEPARSE.equals(m)){
+		if (Constant.M_NAMEFILTER.equals(m)){}
 			
-		}
+
+		if (Constant.M_RESUMEPARSE.equals(m))
+			return resumeParse(reqDict);
+		
+		if (Constant.M_GETFILENFS.equals(m))
+			return resumeParse(reqDict);
 
 		return null;
 	}

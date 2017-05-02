@@ -16,7 +16,8 @@ import com.google.gson.reflect.TypeToken;
 public class GMDNSConfFileUtil {
 	private static final Logger logger = LoggerFactory.getLogger(GMDNSConfFileUtil.class);
 	
-	public static String gmConfFile = "/opt/wwwroot/conf/gm.conf";
+	//public static String gmConfFile = "/opt/wwwroot/conf/gm.conf";//TODO
+	public static String gmConfFile = "D:/gm.conf";
 	public static Map<String,Map<String,List<String>>> gmConfMap;
 	
 	public static List<String> getAllHosts(){

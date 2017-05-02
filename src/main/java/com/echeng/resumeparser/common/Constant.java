@@ -14,9 +14,10 @@ public class Constant {
 	public static final String DOCX = "docx";
 	public static final String HTML = "html";
 	
-	// resume_parse,name_filter
+	// modules
 	public static final String M_RESUMEPARSE = "resume_parse";
 	public static final String M_NAMEFILTER = "name_filter";
+	public static final String M_GETFILENFS = "get_file_nfs";
 
 	
 	// constant files

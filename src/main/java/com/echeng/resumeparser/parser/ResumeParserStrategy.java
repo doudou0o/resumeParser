@@ -18,7 +18,7 @@ import com.echeng.resumeparser.parser.zhaopinParser.ZhaopinParserPool;
 public class ResumeParserStrategy {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ResumeParserStrategy.class);
-	
+
 	@Resource
 	private GeneralParserPool generalParserPool;
 	@Resource
@@ -30,7 +30,7 @@ public class ResumeParserStrategy {
 		ResumeParseResult ret = new ResumeParseResult();
 
 		List<Future<?>> tasks = new ArrayList<Future<?>>(10);
-	
+
 		tasks.add(five1ParserPool.parse(resume, options, ret));
 		tasks.add(zhaopinParserPool.parse(resume, options, ret));
 		tasks.add(generalParserPool.parse(resume, options, ret));
