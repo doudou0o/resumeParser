@@ -2,12 +2,14 @@ package com.echeng.resumeparser.common.utils.gearmanTools;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.gearman.Gearman;
 import org.gearman.GearmanClient;
 import org.gearman.GearmanJobEvent;
 import org.gearman.GearmanJobReturn;
 import org.gearman.GearmanServer;
+
+import com.echeng.resumeparser.common.log.Logger;
+import com.echeng.resumeparser.common.log.LoggerFactory;
 
 
 public class GearmanClientTool {
@@ -17,18 +19,26 @@ public class GearmanClientTool {
 	private String  Worker;
 	private byte[]  RequestData;
 	private Boolean NeedPack = true;
-	
-	private static final Logger logger = Logger.getLogger(GearmanClientTool.class);
+	private static final Logger logger = LoggerFactory.getLogger(GearmanClientTool.class);
 	private static final Gearman gearman = Gearman.createGearman();
 	
+	/**
+	 * 
+	 * @param input
+	 * @param workerName
+	 * @param type "msgpack" or "json" otherwise throw one exception
+	 * @param classOfT
+	 * @return
+	 */
 	public static <T> T GearmanClientSubmit(Object input, String workerName, String type, Class<T> classOfT){
-		//try
+		logger.info("GearmanClient submit job:%s; type:%s; ", workerName, type);
+		
 		byte[] reqBytes = GearmanMsgPack.msgPack(input, type);
 		
-		byte[] retBytes = new GearmanClientTool("icdc_basic").submit(reqBytes);
+		byte[] retBytes = new GearmanClientTool(workerName).submit(reqBytes);
 		
 		return GearmanMsgPack.msgUnPack(retBytes, type, classOfT);
-		
+			
 	}
 	
 
@@ -43,7 +53,7 @@ public class GearmanClientTool {
 
 		if (null == hosts || hosts.isEmpty())
 			throw new NullPointerException("no hosts with worker name: " + worker);
-		hosts.add(0, "192.168.1.111:4730");//TODO
+
 		String[] tmp = hosts.get(0).split(":");
 		if (tmp.length < 2)
 			throw new NullPointerException("the host with worker name:" + worker + ";is invalid");
@@ -80,7 +90,6 @@ public class GearmanClientTool {
 			logger.error("something important not initialize!!");
 			return null;
 		}
-		Worker="resume_parser_module";
 				
 		GearmanJobReturn jobReturn = client.submitJob(Worker, RequestData);
 		
@@ -119,14 +128,14 @@ public class GearmanClientTool {
             switch (event.getEventType()) {
                 // success
                 case GEARMAN_JOB_SUCCESS:
-                    logger.info(event.getData().toString());
+                    logger.info("gearman job success");
                     return event.getData();
 
                 // failure
                 case GEARMAN_SUBMIT_FAIL:
+                	logger.info("gearman submit fail");
                 case GEARMAN_JOB_FAIL:
-                    logger.info(event.getEventType() + ": "
-                            + new String(event.getData()));
+                    logger.info("gearman job fail");
                 default:
             }
         }

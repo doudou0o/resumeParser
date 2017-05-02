@@ -9,27 +9,27 @@ import com.echeng.resumeparser.common.utils.JsonUtil;
 
 public class GearmanMsgPack {
 	
-	//private static final Logger logger = Logger.getLogger(GearmanMsgPack.class);
+	//private static final Logger logger = LoggerFactory.getLogger(GearmanMsgPack.class);
 	
 	/**
 	 * this method is to pack object
 	 * if type is "json" please keep obj is serializable by json
 	 * @param obj
-	 * @param type (only accept "msgpack" or "json" else return null)
+	 * @param type (only accept "msgpack" or "json" else throw a illegalArgumentException)
 	 * @return byte[]
 	 */
 	public static byte[] msgPack(Object obj, String type){
 		if ("msgpack" == type)
 			return msg_pack(obj);
-		if ("json" == type)
+		else if ("json" == type)
 			return JsonUtil.toJson(obj).getBytes();
-		
-		return null;
+		else
+			throw new IllegalArgumentException("type is illegal");
 	}
 	
 	/**
 	 * @param bytesData
-	 * @param type (only accept "msgpack" or "json" else return null)
+	 * @param type (only accept "msgpack" or "json" else throw a illegalArgumentException)
 	 * @return
 	 */
 	public static <T> T msgUnPack(byte[] bytesData, String type, Class<T> classOfT){
@@ -37,8 +37,10 @@ public class GearmanMsgPack {
 		
 		if ("msgpack" == type)
 			jsonStr = msg_unpack(bytesData);
-		if ("json" == type)
+		else if ("json" == type)
 			jsonStr = new String(bytesData);
+		else
+			throw new IllegalArgumentException("type is illegal");
 		
 		if (null != jsonStr && "" != jsonStr)
 			return JsonUtil.fromJson(jsonStr, classOfT);

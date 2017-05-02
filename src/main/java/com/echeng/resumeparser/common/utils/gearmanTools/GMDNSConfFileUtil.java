@@ -16,8 +16,9 @@ import com.google.gson.reflect.TypeToken;
 public class GMDNSConfFileUtil {
 	private static final Logger logger = LoggerFactory.getLogger(GMDNSConfFileUtil.class);
 	
-	//public static String gmConfFile = "/opt/wwwroot/conf/gm.conf";//TODO
-	public static String gmConfFile = "D:/gm.conf";
+	public static String gmConfFile = "/opt/wwwroot/conf/gm.conf";
+	public static String gmConfFile_win = "D:/gm.conf"; //Just 4 test in windows
+
 	public static Map<String,Map<String,List<String>>> gmConfMap;
 	
 	public static List<String> getAllHosts(){
@@ -56,11 +57,20 @@ public class GMDNSConfFileUtil {
 		
 		try {
 			Gson gson =  new Gson();
-			String gmConfStr = FileUtils.readFileToString(new File(gmConfFile));
+			
+			File f = new File(gmConfFile_win);
+			
+			if (!f.exists())
+				f = new File(gmConfFile);
+
+			String gmConfStr = FileUtils.readFileToString(f);
+			
 			gmConfMap = gson.fromJson(gmConfStr, new TypeToken<Map<String,Map<String,List<String>>>>(){}.getType());
+		
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.error("no gm.conf found(linux:/opt/wwwroot/conf/gm.conf, windows(test):D:/gm.conf)",e);
 		}
+		
 		return gmConfMap;
 	}
 
