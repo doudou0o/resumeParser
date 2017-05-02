@@ -43,11 +43,11 @@ public class JsonUtil {
 	}
 	
 	// ===========普通 包装================
-    public static LinkedHashMap<String, Object> parseLinkedHashMap(Object obj) {
-		return parseLinkedHashMap(obj, false);
+    public static LinkedHashMap<String, Object> parse2LinkedHashMap(Object obj) {
+		return parse2LinkedHashMap(obj, false);
     }
 	@SuppressWarnings("unchecked")
-    public static LinkedHashMap<String, Object> parseLinkedHashMap(Object obj, Boolean isExposed) {
+    public static LinkedHashMap<String, Object> parse2LinkedHashMap(Object obj, Boolean isExposed) {
 		if (isExposed)
 			return (LinkedHashMap<String, Object>) gson_sta.fromJson(obj.toString(), LinkedHashMap.class);
 		else
@@ -55,11 +55,11 @@ public class JsonUtil {
     }
 
 
-	public static HashMap<String, Object> parseHashMap(Object obj) {
-        return parseHashMap(obj, false);
+	public static HashMap<String, Object> parse2HashMap(Object obj) {
+        return parse2HashMap(obj, false);
     }
     @SuppressWarnings("unchecked")
-	public static HashMap<String, Object> parseHashMap(Object obj, Boolean isExposed) {
+	public static HashMap<String, Object> parse2HashMap(Object obj, Boolean isExposed) {
     	if (isExposed)
 			return (HashMap<String, Object>) gson_sta.fromJson(obj.toString(), HashMap.class);
     	else
