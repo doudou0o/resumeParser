@@ -2,7 +2,7 @@ package com.echeng.resumeparser.server.gmserverImpl.domain;
 
 import java.util.Map;
 
-import com.echeng.resumeparser.domain.serverIO.response.IResponse;
+import com.echeng.resumeparser.domain.serverIO.IResponse;
 import com.google.gson.annotations.Expose;
 
 import lombok.Data;

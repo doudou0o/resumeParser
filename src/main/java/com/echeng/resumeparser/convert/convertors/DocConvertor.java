@@ -1,7 +1,7 @@
 package com.echeng.resumeparser.convert.convertors;
 
 import com.echeng.resumeparser.convert.IFileConvertor;
-import com.echeng.resumeparser.domain.serverIO.ConvertOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ConvertOption;
 
 public class DocConvertor implements IFileConvertor {
 

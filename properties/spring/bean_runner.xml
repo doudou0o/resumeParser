@@ -13,6 +13,14 @@
 
 
 
+	<!-- controller factory -->
+	<bean id='controllerFactory' class="com.echeng.resumeparser.controller.ControllerFactory" />
+
+	<!-- 各个controller -->
+   	<!-- parser controller -->
+	<bean id='parserController' class="com.echeng.resumeparser.controller.ParseController" />
+
+
 	<!-- 各个runner -->
 	<!-- runner must be prototype -->
 	<bean id='resumeParseRunner' class="com.echeng.resumeparser.core.ResumeParseRunner" scope="prototype">

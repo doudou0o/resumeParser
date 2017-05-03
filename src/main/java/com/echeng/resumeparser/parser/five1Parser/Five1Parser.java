@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
-import com.echeng.resumeparser.domain.serverIO.ParseOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ParseOption;
 import com.echeng.resumeparser.model.DivideModel;
 import com.echeng.resumeparser.parser.IResumeParser;
 

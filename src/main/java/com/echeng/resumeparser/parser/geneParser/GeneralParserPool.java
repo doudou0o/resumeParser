@@ -6,7 +6,7 @@ import java.util.concurrent.Future;
 
 import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
-import com.echeng.resumeparser.domain.serverIO.ParseOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ParseOption;
 import com.echeng.resumeparser.parser.IResumeParserPool;
 
 public class GeneralParserPool implements IResumeParserPool {

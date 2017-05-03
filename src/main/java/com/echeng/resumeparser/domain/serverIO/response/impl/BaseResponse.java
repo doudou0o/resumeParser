@@ -1,6 +1,6 @@
 package com.echeng.resumeparser.domain.serverIO.response.impl;
 
-import com.echeng.resumeparser.domain.serverIO.response.IResponse;
+import com.echeng.resumeparser.domain.serverIO.IResponse;
 
 import lombok.Data;
 

@@ -3,7 +3,7 @@ package com.echeng.resumeparser.merge;
 import java.util.List;
 
 import com.echeng.resumeparser.domain.resume.Resume;
-import com.echeng.resumeparser.domain.serverIO.MergeOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.MergeOption;
 
 public class ResumesMerge {
 

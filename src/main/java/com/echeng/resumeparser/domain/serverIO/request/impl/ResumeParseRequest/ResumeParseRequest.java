@@ -1,12 +1,9 @@
-package com.echeng.resumeparser.domain.serverIO.request.impl;
+package com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
 
 import java.util.Map;
 
 import com.echeng.resumeparser.common.Constant;
-import com.echeng.resumeparser.domain.serverIO.ConvertOption;
-import com.echeng.resumeparser.domain.serverIO.MergeOption;
-import com.echeng.resumeparser.domain.serverIO.ParseOption;
-import com.echeng.resumeparser.domain.serverIO.request.IRequest;
+import com.echeng.resumeparser.domain.serverIO.IRequest;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
@@ -27,7 +24,7 @@ public class ResumeParseRequest implements IRequest {
 	// must implement
 	public static String getRequestMatchInfo(Map<String,Object> reqDicP){
 		if (null == reqDicP)
-			return "no request parameters";
+			return "no request parameter in ";
 		if (!reqDicP.containsKey("groupname") || "".equals(reqDicP.get("groupname")))
 			return "no 'groupname' in request parameters";
 		if (!reqDicP.containsKey("filename") || "".equals(reqDicP.get("filename")))

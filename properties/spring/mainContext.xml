@@ -26,8 +26,6 @@
    	<!-- server入口 -->
    	<bean id='server' class="com.echeng.resumeparser.server.gmserverImpl.GMServerImpl" init-method="init"/>
    	
-   	<!-- controller -->
-	<bean id='control' class="com.echeng.resumeparser.core.ParseController" />
 	
 	<!-- merge -->
 	<bean id="resumesMerge" class="com.echeng.resumeparser.merge.ResumesMerge" />

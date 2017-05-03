@@ -10,7 +10,7 @@ import com.echeng.resumeparser.common.log.Logger;
 import com.echeng.resumeparser.common.log.LoggerFactory;
 import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
-import com.echeng.resumeparser.domain.serverIO.ParseOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ParseOption;
 import com.echeng.resumeparser.parser.five1Parser.Five1ParserPool;
 import com.echeng.resumeparser.parser.geneParser.GeneralParserPool;
 import com.echeng.resumeparser.parser.zhaopinParser.ZhaopinParserPool;

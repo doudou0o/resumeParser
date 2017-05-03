@@ -3,7 +3,7 @@ package com.echeng.resumeparser.convert.convertors;
 import java.io.UnsupportedEncodingException;
 
 import com.echeng.resumeparser.convert.IFileConvertor;
-import com.echeng.resumeparser.domain.serverIO.ConvertOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ConvertOption;
 
 /**
  * keep the text encoded by UTF-8 !!

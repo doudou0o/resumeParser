@@ -9,9 +9,9 @@ import org.junit.Test;
 import com.echeng.resumeparser.BaseTestCase;
 import com.echeng.resumeparser.common.utils.JsonUtil;
 import com.echeng.resumeparser.domain.resume.Resume;
-import com.echeng.resumeparser.domain.serverIO.request.IRequest;
+import com.echeng.resumeparser.domain.serverIO.IRequest;
 import com.echeng.resumeparser.domain.serverIO.request.RequestHelper;
-import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ResumeParseRequest;
 
 public class ResumeParseRunnerTest extends BaseTestCase {
 	

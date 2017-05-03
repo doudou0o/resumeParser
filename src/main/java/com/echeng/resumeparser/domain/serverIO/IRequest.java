@@ -1,4 +1,4 @@
-package com.echeng.resumeparser.domain.serverIO.request;
+package com.echeng.resumeparser.domain.serverIO;
 
 import java.util.Map;
 

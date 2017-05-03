@@ -2,7 +2,7 @@ package com.echeng.resumeparser.parser;
 
 import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
-import com.echeng.resumeparser.domain.serverIO.ParseOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ParseOption;
 
 public interface IResumeParser extends Runnable {
 	public String getParserName();

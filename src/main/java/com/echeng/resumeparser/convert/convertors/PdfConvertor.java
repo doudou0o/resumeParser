@@ -9,7 +9,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import com.echeng.resumeparser.common.log.Logger;
 import com.echeng.resumeparser.common.log.LoggerFactory;
 import com.echeng.resumeparser.convert.IFileConvertor;
-import com.echeng.resumeparser.domain.serverIO.ConvertOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ConvertOption;
 
 /**
  * this converter dependent on "pdfbox"

@@ -7,7 +7,7 @@ import com.echeng.resumeparser.common.utils.ResumeUtil;
 import com.echeng.resumeparser.convert.FileConvertorStrategy;
 import com.echeng.resumeparser.domain.ResumeParseResult;
 import com.echeng.resumeparser.domain.resume.Resume;
-import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ResumeParseRequest;
 import com.echeng.resumeparser.merge.ResumesMerge;
 import com.echeng.resumeparser.parser.ResumeParserStrategy;
 import com.echeng.resumeparser.resumeInput.IResumeReaderStrategy;

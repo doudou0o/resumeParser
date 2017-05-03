@@ -8,7 +8,7 @@ import com.echeng.resumeparser.convert.convertors.DocConvertor;
 import com.echeng.resumeparser.convert.convertors.HtmlConvertor;
 import com.echeng.resumeparser.convert.convertors.PdfConvertor;
 import com.echeng.resumeparser.convert.convertors.TxtConvertor;
-import com.echeng.resumeparser.domain.serverIO.ConvertOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ConvertOption;
 
 /**
  * 代理模式

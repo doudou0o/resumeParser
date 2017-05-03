@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.echeng.resumeparser.common.log.Logger;
 import com.echeng.resumeparser.common.log.LoggerFactory;
 import com.echeng.resumeparser.common.utils.JsonUtil;
-import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest;
+import com.echeng.resumeparser.domain.serverIO.IRequest;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ResumeParseRequest;
 
 public class RequestHelper {
 	
@@ -78,7 +78,7 @@ public class RequestHelper {
 		return reqClses;
 	}
 
-	public static IRequest buildResumeParseReq(LinkedHashMap<String, Object> reqDict) {
+	public static IRequest buildResumeParseReq(Map<String, Object> reqDict) {
 		ResumeParseRequest req = JsonUtil.fromJson(JsonUtil.toJson(reqDict), ResumeParseRequest.class);
 		return req;
 	}

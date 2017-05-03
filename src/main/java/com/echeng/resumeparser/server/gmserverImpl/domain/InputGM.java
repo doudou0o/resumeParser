@@ -16,6 +16,8 @@ public class InputGM {
 	@Expose
 	private Map<String, String> header;
 	
+	private String unpackType;
+	
 	private Header headerObj = new Header();
 
 	public String getM(){

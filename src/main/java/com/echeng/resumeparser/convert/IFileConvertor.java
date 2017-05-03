@@ -1,6 +1,6 @@
 package com.echeng.resumeparser.convert;
 
-import com.echeng.resumeparser.domain.serverIO.ConvertOption;
+import com.echeng.resumeparser.domain.serverIO.request.impl.ResumeParseRequest.ConvertOption;
 
 public interface IFileConvertor {
 	public void init();

@@ -3,7 +3,7 @@ package com.echeng.resumeparser.domain.serverIO.request.impl;
 import java.util.Map;
 
 import com.echeng.resumeparser.common.Constant;
-import com.echeng.resumeparser.domain.serverIO.request.IRequest;
+import com.echeng.resumeparser.domain.serverIO.IRequest;
 
 public class ResumeElementFilterRequest implements IRequest {
 	
